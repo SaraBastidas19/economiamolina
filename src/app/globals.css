@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/*
+ * Tokens del sistema de diseño "Calzaturiero Tradicional" (design/DESIGN.md),
+ * tomados de la exportación de Google Stitch (design/code.html).
+ */
+@theme {
+  --color-primary: #002045;
+  --color-primary-container: #1a365d;
+  --color-on-primary: #ffffff;
+  --color-navy-deep: #0f2444;
+  --color-secondary: #904d00;
+  --color-secondary-container: #fe932c;
+  --color-heritage-gold: #d4a038;
+  --color-alert-terracotta: #c43726;
+  --color-whatsapp-vibrant: #25d366;
+  --color-whatsapp-dark: #128c7e;
+  --color-whatsapp-text: #0b6b60;
+
+  --color-canvas-cream: #fbfbfa;
+  --color-surface-warm: #f4f1ec;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-container-high: #dce9ff;
+  --color-surface-variant: #d3e4fe;
+
+  --color-on-surface: #0b1c30;
+  --color-on-surface-variant: #43474e;
+  --color-text-primary: #1a1a1a;
+  --color-slate: #64748b;
+  --color-outline: #74777f;
+  --color-outline-variant: #c4c6cf;
+  --color-border-warm: #e2ded7;
+  --color-border-soft: #f0ede6;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: 48px;
+  --text-display--line-height: 56px;
+  --text-display--letter-spacing: -0.02em;
+  --text-display-mobile: 34px;
+  --text-display-mobile--line-height: 42px;
+  --text-display-mobile--letter-spacing: -0.01em;
+  --text-headline-lg: 36px;
+  --text-headline-lg--line-height: 44px;
+  --text-headline-lg--letter-spacing: -0.015em;
+  --text-headline-lg-mobile: 26px;
+  --text-headline-lg-mobile--line-height: 34px;
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-title-md: 18px;
+  --text-title-md--line-height: 26px;
+  --text-title-sm: 16px;
+  --text-title-sm--line-height: 24px;
+  --text-body-lg: 17px;
+  --text-body-lg--line-height: 26px;
+  --text-body-md: 15px;
+  --text-body-md--line-height: 24px;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 20px;
+  --text-label-lg: 14px;
+  --text-label-lg--line-height: 20px;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-xs: 11px;
+  --text-label-xs--line-height: 14px;
+  --text-label-xs--letter-spacing: 0.03em;
+  --text-price-display: 22px;
+  --text-price-display--line-height: 28px;
+  --text-price-sm: 16px;
+  --text-price-sm--line-height: 22px;
+
+  --radius-btn: 10px;
+
+  --shadow-card: 0 2px 8px -2px rgb(15 36 68 / 0.06), 0 1px 3px rgb(15 36 68 / 0.04);
+  --shadow-lift: 0 10px 22px -6px rgb(15 36 68 / 0.1), 0 4px 8px -2px rgb(15 36 68 / 0.05);
+  --shadow-sticky: 0 16px 36px -8px rgb(15 36 68 / 0.16), 0 6px 14px -4px rgb(15 36 68 / 0.08);
+  --shadow-modal: 0 24px 48px -12px rgb(15 36 68 / 0.22);
+
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-canvas-cream);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary-container);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Íconos de Material Symbols (subconjunto cargado en el layout). */
+.icon {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 400;
+  user-select: none;
+}
+
+.icon-filled {
+  font-variation-settings: "FILL" 1, "wght" 400;
+}
