@@ -4,6 +4,7 @@ import { business } from "@/config/business";
 import { Icon } from "@/components/ui/icon";
 import { MainNav, MobileMenu } from "@/components/layout/main-nav";
 import { SearchForm } from "@/components/layout/search-form";
+import { CartLink } from "@/components/layout/cart-link";
 
 export function SiteHeader() {
   return (
@@ -37,6 +38,7 @@ export function SiteHeader() {
         >
           <Icon name="search" className="text-[24px]" />
         </Link>
+        <CartLink />
       </div>
     </header>
   );

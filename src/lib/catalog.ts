@@ -44,6 +44,18 @@ export async function getProductBySlug(slug: string): Promise<Product | undefine
   return published().find((p) => p.slug === slug);
 }
 
+/** Busca la variante (color + talla) por su SKU junto con su producto publicado. */
+export async function getVariantBySku(sku: string) {
+  for (const product of published()) {
+    const variant = product.variants.find((v) => v.sku === sku);
+    if (variant) {
+      const color = product.colors.find((c) => c.id === variant.colorId)!;
+      return { product, variant, color };
+    }
+  }
+  return undefined;
+}
+
 export async function getAllProductSlugs(): Promise<string[]> {
   return published().map((p) => p.slug);
 }

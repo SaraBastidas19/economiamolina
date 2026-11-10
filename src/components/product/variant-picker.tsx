@@ -1,0 +1,179 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import type { Product } from "@/types/product";
+import { addToCart, MAX_QTY_PER_LINE, useCart } from "@/lib/cart-store";
+import { Icon } from "@/components/ui/icon";
+
+type Status = { kind: "ok" | "error"; text: string } | null;
+
+export function VariantPicker({ product }: { product: Product }) {
+  const firstColorWithStock =
+    product.colors.find((c) => product.variants.some((v) => v.colorId === c.id && v.stock > 0)) ?? product.colors[0];
+  const [colorId, setColorId] = useState(firstColorWithStock.id);
+  const [size, setSize] = useState<number | null>(null);
+  const [qty, setQty] = useState(1);
+  const [status, setStatus] = useState<Status>(null);
+  const cart = useCart();
+
+  const sizes = product.variants.filter((v) => v.colorId === colorId).sort((a, b) => a.size - b.size);
+  const variant = sizes.find((v) => v.size === size);
+  const inCart = variant ? (cart.find((i) => i.sku === variant.sku)?.qty ?? 0) : 0;
+  const maxQty = variant ? Math.max(0, Math.min(variant.stock, MAX_QTY_PER_LINE) - inCart) : 1;
+
+  function selectColor(id: string) {
+    setColorId(id);
+    setSize(null);
+    setQty(1);
+    setStatus(null);
+  }
+
+  function selectSize(value: number) {
+    setSize(value);
+    setQty(1);
+    setStatus(null);
+  }
+
+  function handleAdd() {
+    if (!variant) {
+      setStatus({ kind: "error", text: "Elige una talla para continuar." });
+      return;
+    }
+    if (maxQty === 0) {
+      setStatus({ kind: "error", text: "Ya tienes en el carrito todas las unidades disponibles de esta talla." });
+      return;
+    }
+    const added = addToCart(variant.sku, Math.min(qty, maxQty), variant.stock);
+    setQty(1);
+    setStatus({
+      kind: "ok",
+      text: `Agregaste ${added} ${added === 1 ? "par" : "pares"} talla ${variant.size} al carrito.`,
+    });
+  }
+
+  const colorName = product.colors.find((c) => c.id === colorId)?.name;
+
+  return (
+    <div className="space-y-5">
+      <fieldset>
+        <legend className="text-label-lg font-semibold text-primary">
+          Color: <span className="font-normal text-on-surface-variant">{colorName}</span>
+        </legend>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {product.colors.map((c) => {
+            const selected = c.id === colorId;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => selectColor(c.id)}
+                className={`flex min-h-11 items-center gap-2 rounded-full border py-1.5 pl-1.5 pr-3 text-label-lg transition-colors ${
+                  selected ? "border-primary-container ring-2 ring-primary-container/25" : "border-border-warm bg-white hover:border-primary-container"
+                }`}
+              >
+                <span className="size-7 rounded-full ring-1 ring-black/10" style={{ backgroundColor: c.hex }} aria-hidden="true" />
+                {c.name}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <div className="flex items-center justify-between">
+          <legend className="text-label-lg font-semibold text-primary">Talla (Colombia)</legend>
+          <Link href="/#guia-de-tallas" className="text-label-md font-semibold text-primary-container underline-offset-4 hover:underline">
+            Guía de tallas
+          </Link>
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {sizes.map((v) => {
+            const selected = v.size === size;
+            const soldOut = v.stock === 0;
+            return (
+              <button
+                key={v.sku}
+                type="button"
+                disabled={soldOut}
+                aria-pressed={selected}
+                onClick={() => selectSize(v.size)}
+                className={`flex size-11 items-center justify-center rounded-lg border text-label-lg font-semibold transition-[transform,colors] ${
+                  soldOut
+                    ? "cursor-not-allowed border-border-soft bg-surface-warm text-slate/60 line-through"
+                    : selected
+                      ? "scale-105 border-primary-container bg-primary-container text-white"
+                      : "border-border-warm bg-white text-text-primary hover:border-primary-container"
+                }`}
+              >
+                {v.size}
+                {soldOut && <span className="sr-only"> (agotada)</span>}
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-label-md text-slate">
+          {variant
+            ? variant.stock <= 3
+              ? `¡Quedan ${variant.stock} ${variant.stock === 1 ? "par" : "pares"} en talla ${variant.size}!`
+              : `Disponible en talla ${variant.size}.`
+            : "Las tallas tachadas están agotadas."}
+        </p>
+      </fieldset>
+
+      <div className="flex flex-wrap items-stretch gap-3">
+        <div className="flex items-center rounded-btn border border-border-warm bg-white" role="group" aria-label="Cantidad">
+          <button
+            type="button"
+            onClick={() => setQty((q) => Math.max(1, q - 1))}
+            disabled={qty <= 1}
+            className="flex size-12 items-center justify-center text-primary disabled:text-outline-variant"
+            aria-label="Disminuir cantidad"
+          >
+            <Icon name="remove" className="text-[20px]" />
+          </button>
+          <output className="w-8 text-center font-display text-title-md font-semibold" aria-live="polite">
+            {qty}
+          </output>
+          <button
+            type="button"
+            onClick={() => setQty((q) => q + 1)}
+            disabled={!variant || qty >= maxQty}
+            className="flex size-12 items-center justify-center text-primary disabled:text-outline-variant"
+            aria-label="Aumentar cantidad"
+          >
+            <Icon name="add" className="text-[20px]" />
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-btn bg-primary-container px-6 text-title-sm font-semibold text-white shadow-card transition-colors hover:bg-navy-deep"
+        >
+          <Icon name="shopping_bag" className="text-[20px]" />
+          Agregar al carrito
+        </button>
+      </div>
+
+      <div aria-live="polite">
+        {status && (
+          <p
+            className={`flex flex-wrap items-center gap-2 rounded-lg px-4 py-3 text-body-sm ${
+              status.kind === "ok" ? "bg-whatsapp-vibrant/10 text-whatsapp-text" : "bg-error-container text-error"
+            }`}
+          >
+            <Icon name={status.kind === "ok" ? "check" : "error"} className="text-[18px]" />
+            {status.text}
+            {status.kind === "ok" && (
+              <Link href="/carrito" className="ml-auto font-semibold underline underline-offset-4">
+                Ver carrito
+              </Link>
+            )}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}

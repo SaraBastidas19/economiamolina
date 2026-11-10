@@ -3,6 +3,7 @@
  * el subconjunto listado aquí: al usar un ícono nuevo, agrégalo a ICON_NAMES.
  */
 export const ICON_NAMES = [
+  "add",
   "arrow_back",
   "arrow_forward",
   "call",
@@ -10,15 +11,19 @@ export const ICON_NAMES = [
   "check",
   "chevron_right",
   "close",
+  "delete",
+  "error",
   "expand_more",
   "info",
   "local_shipping",
   "location_on",
   "menu",
   "payments",
+  "remove",
   "schedule",
   "search",
   "search_off",
+  "shopping_bag",
   "storefront",
   "straighten",
   "support_agent",
