@@ -22,7 +22,7 @@ export function WhyUs() {
     },
     business.policies.exchanges
       ? { icon: "sync_alt", title: "Cambios", text: business.policies.exchanges }
-      : { icon: "location_on", title: `Tienda en ${business.city}`, text: `Somos un negocio local de ${business.city}, ${business.region}.` },
+      : { icon: "workspace_premium", title: "Fábrica y tienda", text: `Fabricamos y vendemos directamente en ${business.city}: ${business.promise.toLowerCase()}.` },
   ];
 
   return (
@@ -31,17 +31,18 @@ export function WhyUs() {
         id="por-que"
         eyebrow="Nuestra promesa"
         title="¿Por qué comprarnos?"
-        description="La confianza de comprarle a un negocio local que te acompaña en cada par."
+        highlight="comprarnos"
+        description={`${business.promise}: más de ${business.yearsInBusiness} años fabricando y vendiendo calzado en ${business.city}.`}
         align="center"
       />
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {reasons.map((r) => (
-          <li key={r.title} className="rounded-xl border border-border-soft bg-white p-6 shadow-card">
-            <span className="flex size-12 items-center justify-center rounded-full bg-surface-warm text-secondary">
+          <li key={r.title} className="rounded-3xl border border-line bg-white p-6 shadow-card">
+            <span className="flex size-12 items-center justify-center rounded-full bg-gold-soft text-gold-text">
               <Icon name={r.icon} className="text-[24px]" />
             </span>
-            <h3 className="mt-4 font-display text-title-md font-semibold text-primary">{r.title}</h3>
-            <p className="mt-1.5 text-body-sm text-on-surface-variant">{r.text}</p>
+            <h3 className="mt-4 font-display text-title-md font-semibold text-ink">{r.title}</h3>
+            <p className="mt-1.5 text-body-sm text-muted">{r.text}</p>
           </li>
         ))}
       </ul>
@@ -60,23 +61,23 @@ export function HowToBuy() {
   ];
 
   return (
-    <section aria-labelledby="como-comprar" className="bg-surface-warm py-14">
+    <section aria-labelledby="como-comprar" className="bg-sand py-14">
       <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-14">
-        <SectionHeading id="como-comprar" eyebrow="Proceso simple" title="Cómo comprar" align="center" />
+        <SectionHeading id="como-comprar" eyebrow="Proceso simple" title="Cómo comprar" highlight="comprar" align="center" />
         <ol className="grid gap-4 md:grid-cols-3 lg:gap-6">
           {steps.map((s, i) => (
-            <li key={s.title} className="relative rounded-xl bg-white p-6 shadow-card">
-              <span className="flex size-10 items-center justify-center rounded-full bg-primary-container font-display text-title-md font-bold text-white">
+            <li key={s.title} className="relative rounded-3xl bg-white p-6 shadow-card">
+              <span className="flex size-10 items-center justify-center rounded-full bg-brand font-display text-title-md font-bold text-white">
                 {i + 1}
               </span>
-              <h3 className="mt-4 font-display text-title-md font-semibold text-primary">{s.title}</h3>
-              <p className="mt-1.5 text-body-sm text-on-surface-variant">{s.text}</p>
+              <h3 className="mt-4 font-display text-title-md font-semibold text-ink">{s.title}</h3>
+              <p className="mt-1.5 text-body-sm text-muted">{s.text}</p>
             </li>
           ))}
         </ol>
         {business.policies.paymentMethods && (
-          <p className="mt-6 flex items-center justify-center gap-2 text-center text-body-md text-on-surface-variant">
-            <Icon name="payments" className="text-[20px] text-secondary" />
+          <p className="mt-6 flex items-center justify-center gap-2 text-center text-body-md text-muted">
+            <Icon name="payments" className="text-[20px] text-gold-text" />
             Medios de pago: {business.policies.paymentMethods}
           </p>
         )}
@@ -102,12 +103,13 @@ export function SizeGuide() {
         id="guia-de-tallas-titulo"
         eyebrow="Ajuste perfecto"
         title="Guía de tallas"
+        highlight="tallas"
         description="Medidas de referencia en centímetros según la numeración colombiana. Cada horma puede variar."
       />
-      <div className="overflow-x-auto rounded-xl border border-border-soft bg-white shadow-card">
+      <div className="overflow-x-auto rounded-3xl border border-line bg-white shadow-card">
         <table className="w-full min-w-[640px] text-left text-body-sm">
           <caption className="sr-only">Equivalencias de tallas por línea de calzado</caption>
-          <thead className="bg-surface-warm text-label-md uppercase tracking-wide text-primary">
+          <thead className="bg-sand text-label-md uppercase tracking-wide text-ink">
             <tr>
               <th scope="col" className="px-5 py-3">Línea</th>
               <th scope="col" className="px-5 py-3">Talla Colombia</th>
@@ -116,22 +118,22 @@ export function SizeGuide() {
               <th scope="col" className="px-5 py-3">Recomendación</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border-soft">
+          <tbody className="divide-y divide-line">
             {sizeRows.map((r) => (
               <tr key={r.line}>
-                <th scope="row" className="px-5 py-3.5 font-semibold text-primary">{r.line}</th>
+                <th scope="row" className="px-5 py-3.5 font-semibold text-ink">{r.line}</th>
                 <td className="px-5 py-3.5">{r.sizes}</td>
                 <td className="px-5 py-3.5">{r.foot}</td>
                 <td className="px-5 py-3.5">{r.us}</td>
-                <td className="px-5 py-3.5 text-on-surface-variant">{r.tip}</td>
+                <td className="px-5 py-3.5 text-muted">{r.tip}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-5 flex flex-col gap-4 rounded-xl bg-surface-warm p-5 md:flex-row md:items-center md:justify-between">
-        <p className="flex gap-2 text-body-md text-on-surface-variant">
-          <Icon name="straighten" className="text-[22px] text-secondary" />
+      <div className="mt-5 flex flex-col gap-4 rounded-3xl bg-sand p-5 md:flex-row md:items-center md:justify-between">
+        <p className="flex gap-2 text-body-md text-muted">
+          <Icon name="straighten" className="text-[22px] text-gold-text" />
           Para medir tu pie, apóyalo descalzo sobre una hoja y mide desde el talón hasta la punta del dedo más largo.
         </p>
         <WhatsAppButton
@@ -170,15 +172,15 @@ export function Faq() {
       id="preguntas-frecuentes"
       className="mx-auto max-w-3xl scroll-mt-24 px-4 py-14 md:px-8"
     >
-      <SectionHeading id="preguntas-frecuentes-titulo" eyebrow="Resolvemos tus inquietudes" title="Preguntas frecuentes" align="center" />
+      <SectionHeading id="preguntas-frecuentes-titulo" eyebrow="Resolvemos tus inquietudes" title="Preguntas frecuentes" highlight="frecuentes" align="center" />
       <div className="space-y-3">
         {items.map((item) => (
-          <details key={item.q} className="group rounded-xl border border-border-soft bg-white shadow-card open:shadow-lift">
-            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-3 font-display text-title-sm font-semibold text-primary [&::-webkit-details-marker]:hidden">
+          <details key={item.q} className="group rounded-3xl border border-line bg-white shadow-card open:shadow-lift">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-3 font-display text-title-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
               {item.q}
-              <Icon name="expand_more" className="text-[24px] text-outline transition-transform group-open:rotate-180" />
+              <Icon name="expand_more" className="text-[24px] text-muted transition-transform group-open:rotate-180" />
             </summary>
-            <p className="px-5 pb-5 text-body-md text-on-surface-variant">{item.a}</p>
+            <p className="px-5 pb-5 text-body-md text-muted">{item.a}</p>
           </details>
         ))}
       </div>
@@ -188,15 +190,15 @@ export function Faq() {
 
 export function FinalCta() {
   return (
-    <section aria-labelledby="cta-final" className="bg-primary-container py-14 text-white">
+    <section aria-labelledby="cta-final" className="bg-deep py-14 text-white">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 text-center">
         <h2 id="cta-final" className="text-balance font-display text-headline-lg-mobile font-bold md:text-headline-lg">
-          ¿Encontraste lo que buscabas? Pregúntanos por tu talla
+          ¿Encontraste lo que buscabas? Pregúntanos por tu <span className="text-gold-soft">talla</span>
         </h2>
         <p className="text-body-lg text-white/80">
           Te ayudamos con modelos, colores y disponibilidad para que compres con tranquilidad.
         </p>
-        <WhatsAppButton size="lg" label="Consultar por WhatsApp" message="Hola, quisiera hacer una consulta sobre su calzado." />
+        <WhatsAppButton size="lg" variant="light" label="Consultar por WhatsApp" message="Hola, quisiera hacer una consulta sobre su calzado." />
       </div>
     </section>
   );

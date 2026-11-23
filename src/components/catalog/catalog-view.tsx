@@ -24,29 +24,29 @@ export function CatalogView({ filter, searchParams }: CatalogViewProps) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:px-8 lg:px-14">
-      <nav aria-label="Ruta de navegación" className="text-label-md text-slate">
+      <nav aria-label="Ruta de navegación" className="text-label-md text-muted">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
-            <Link href="/" className="hover:text-primary hover:underline">Inicio</Link>
+            <Link href="/" className="hover:text-ink hover:underline">Inicio</Link>
           </li>
           <li aria-hidden="true"><Icon name="chevron_right" className="text-[16px]" /></li>
           {filter.audience || filter.type || filter.collection ? (
             <>
               <li>
-                <Link href="/catalogo" className="hover:text-primary hover:underline">Catálogo</Link>
+                <Link href="/catalogo" className="hover:text-ink hover:underline">Catálogo</Link>
               </li>
               <li aria-hidden="true"><Icon name="chevron_right" className="text-[16px]" /></li>
-              <li aria-current="page" className="font-semibold text-primary">{title}</li>
+              <li aria-current="page" className="font-semibold text-ink">{title}</li>
             </>
           ) : (
-            <li aria-current="page" className="font-semibold text-primary">Catálogo</li>
+            <li aria-current="page" className="font-semibold text-ink">Catálogo</li>
           )}
         </ol>
       </nav>
 
       <header className="mt-4 max-w-2xl">
-        <h1 className="font-display text-headline-lg-mobile font-bold tracking-tight text-primary md:text-headline-lg">{title}</h1>
-        <p className="mt-2 text-body-md text-on-surface-variant">{filterDescription(filter)}</p>
+        <h1 className="font-display text-headline-lg-mobile font-bold tracking-tight text-ink md:text-headline-lg">{title}</h1>
+        <p className="mt-2 text-body-md text-muted">{filterDescription(filter)}</p>
       </header>
 
       {!filter.collection && <FilterChips filter={filter} />}
@@ -66,8 +66,8 @@ function FilterChips({ filter }: { filter: CatalogFilter }) {
         aria-current={active ? "page" : undefined}
         className={`inline-flex min-h-10 items-center rounded-full border px-4 text-label-lg font-semibold transition-colors ${
           active
-            ? "border-primary-container bg-primary-container text-white"
-            : "border-border-warm bg-white text-on-surface-variant hover:border-primary-container hover:text-primary"
+            ? "border-brand bg-brand text-white"
+            : "border-line bg-white text-muted hover:border-brand hover:text-ink"
         }`}
       >
         {label}
@@ -76,7 +76,7 @@ function FilterChips({ filter }: { filter: CatalogFilter }) {
   );
 
   return (
-    <div className="mt-6 space-y-3 border-y border-border-soft py-4">
+    <div className="mt-6 space-y-3 border-y border-line py-4">
       <nav aria-label="Filtrar por público">
         <ul className="flex flex-wrap gap-2">
           {chip(catalogPath({ type: filter.type }), "Todos", !filter.audience)}
@@ -101,16 +101,16 @@ async function Results({ filter, searchParams }: CatalogViewProps) {
   return (
     <section aria-label="Resultados" className="mt-6">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2" aria-live="polite">
-        <p className="text-body-sm text-on-surface-variant">
+        <p className="text-body-sm text-muted">
           {search && (
             <>
-              Resultados para <strong className="text-primary">“{search}”</strong> ·{" "}
+              Resultados para <strong className="text-ink">“{search}”</strong> ·{" "}
             </>
           )}
           {products.length} {products.length === 1 ? "modelo" : "modelos"}
         </p>
         {search && (
-          <Link href={catalogPath(filter)} className="text-label-lg font-semibold text-primary-container hover:underline">
+          <Link href={catalogPath(filter)} className="text-label-lg font-semibold text-brand hover:underline">
             Quitar búsqueda
           </Link>
         )}
@@ -119,17 +119,17 @@ async function Results({ filter, searchParams }: CatalogViewProps) {
       {products.length > 0 ? (
         <ProductGrid products={products} eagerCount={4} />
       ) : (
-        <div className="flex flex-col items-center rounded-xl border border-dashed border-border-warm bg-white px-6 py-14 text-center">
-          <Icon name="search_off" className="text-[40px] text-outline" />
-          <h2 className="mt-3 font-display text-title-md font-semibold text-primary">No encontramos modelos</h2>
-          <p className="mt-1 max-w-md text-body-md text-on-surface-variant">
+        <div className="flex flex-col items-center rounded-3xl border border-dashed border-line bg-white px-6 py-14 text-center">
+          <Icon name="search_off" className="text-[40px] text-muted" />
+          <h2 className="mt-3 font-display text-title-md font-semibold text-ink">No encontramos modelos</h2>
+          <p className="mt-1 max-w-md text-body-md text-muted">
             {search
               ? "Prueba con otra palabra, revisa la ortografía o explora todo el catálogo."
               : "Por ahora no hay modelos en esta categoría. Explora otras opciones del catálogo."}
           </p>
           <Link
             href="/catalogo"
-            className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-primary-container px-5 text-label-lg font-semibold text-white hover:bg-navy-deep"
+            className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-brand px-5 text-label-lg font-semibold text-white hover:bg-brand-hover"
           >
             Ver todo el catálogo
           </Link>

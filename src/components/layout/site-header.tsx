@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { business } from "@/config/business";
@@ -8,20 +9,26 @@ import { CartLink } from "@/components/layout/cart-link";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border-soft bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 md:h-[72px] md:px-8 lg:px-14">
         <MobileMenu />
 
-        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${business.name}, ir al inicio`}>
-          <span className="flex size-9 items-center justify-center rounded-lg bg-primary-container text-white">
-            <Icon name="storefront" className="text-[20px]" />
-          </span>
-          <span className="leading-tight">
-            <span className="block font-display text-title-md font-bold text-primary">{business.name}</span>
-            <span className="hidden text-label-xs font-semibold uppercase tracking-wider text-secondary sm:block">
-              Calzado · {business.city}
+        <Link href="/" className="flex shrink-0 items-center" aria-label={`${business.name}, ir al inicio`}>
+          {business.logo ? (
+            <Image
+              src={business.logo.src}
+              alt={business.name}
+              width={business.logo.width}
+              height={business.logo.height}
+              preload
+              className="h-10 w-auto md:h-12"
+            />
+          ) : (
+            <span className="leading-none">
+              <span className="block text-label-xs font-bold uppercase tracking-[0.18em] text-gold-text">Economía</span>
+              <span className="mt-0.5 block font-display text-title-md font-bold text-ink md:text-headline-sm">Molina Muñoz</span>
             </span>
-          </span>
+          )}
         </Link>
 
         <MainNav />
@@ -33,7 +40,7 @@ export function SiteHeader() {
         </div>
         <Link
           href="/catalogo"
-          className="ml-auto flex size-11 items-center justify-center rounded-full text-primary hover:bg-surface-warm md:hidden"
+          className="ml-auto flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand md:hidden"
           aria-label="Buscar en el catálogo"
         >
           <Icon name="search" className="text-[24px]" />

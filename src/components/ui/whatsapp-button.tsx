@@ -4,14 +4,15 @@ import { whatsappUrl } from "@/lib/whatsapp";
 interface WhatsAppButtonProps {
   message: string;
   label: string;
-  variant?: "solid" | "soft";
+  variant?: "solid" | "soft" | "light";
   size?: "md" | "lg";
   className?: string;
 }
 
 const variants = {
-  solid: "bg-whatsapp-vibrant text-navy-deep hover:bg-[#1fbe5b]",
-  soft: "bg-white text-whatsapp-text ring-1 ring-whatsapp-dark/30 hover:bg-whatsapp-vibrant/10",
+  solid: "bg-brand text-white hover:bg-brand-hover",
+  soft: "bg-white text-brand ring-1 ring-brand/30 hover:bg-blush",
+  light: "bg-white text-deep hover:bg-blush",
 };
 
 const sizes = {
@@ -33,7 +34,7 @@ export function WhatsAppButton({ message, label, variant = "solid", size = "md",
         type="button"
         disabled
         title="El número de WhatsApp aún no está configurado"
-        className={`${base} cursor-not-allowed bg-surface-warm text-on-surface-variant ring-1 ring-border-warm`}
+        className={`${base} cursor-not-allowed bg-sand text-muted ring-1 ring-line`}
       >
         <Icon name="chat" className="text-[20px]" />
         <span>

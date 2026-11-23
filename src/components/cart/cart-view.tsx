@@ -55,15 +55,15 @@ export function CartView({ whatsappConfigured }: { whatsappConfigured: boolean }
 
   if (items.length === 0) {
     return (
-      <div className="mt-8 flex flex-col items-center rounded-xl border border-dashed border-border-warm bg-white px-6 py-16 text-center">
-        <Icon name="shopping_bag" className="text-[44px] text-outline" />
-        <h2 className="mt-3 font-display text-title-md font-semibold text-primary">Tu carrito está vacío</h2>
-        <p className="mt-1 max-w-md text-body-md text-on-surface-variant">
+      <div className="mt-8 flex flex-col items-center rounded-3xl border border-dashed border-line bg-white px-6 py-16 text-center">
+        <Icon name="shopping_bag" className="text-[44px] text-muted" />
+        <h2 className="mt-3 font-display text-title-md font-semibold text-ink">Tu carrito está vacío</h2>
+        <p className="mt-1 max-w-md text-body-md text-muted">
           Elige un modelo, selecciona tu talla y agrégalo para armar tu pedido.
         </p>
         <Link
           href="/catalogo"
-          className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-primary-container px-5 text-label-lg font-semibold text-white hover:bg-navy-deep"
+          className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-brand px-5 text-label-lg font-semibold text-white hover:bg-brand-hover"
         >
           Ver catálogo
         </Link>
@@ -82,7 +82,7 @@ export function CartView({ whatsappConfigured }: { whatsappConfigured: boolean }
   return (
     <div className="mt-6 grid gap-8 lg:grid-cols-12">
       <section aria-label="Productos del carrito" className="lg:col-span-7">
-        <ul className="divide-y divide-border-soft rounded-xl border border-border-soft bg-white shadow-card">
+        <ul className="divide-y divide-line rounded-3xl border border-line bg-white shadow-card">
           {quote.lines.filter((line) => items.some((i) => i.sku === line.sku)).map((line) => (
             <CartLine key={line.sku} line={line} qty={items.find((i) => i.sku === line.sku)?.qty ?? line.qty} />
           ))}
@@ -90,7 +90,7 @@ export function CartView({ whatsappConfigured }: { whatsappConfigured: boolean }
         <button
           type="button"
           onClick={() => clearCart()}
-          className="mt-3 inline-flex min-h-11 items-center gap-1.5 px-1 text-label-lg font-semibold text-slate hover:text-alert-terracotta"
+          className="mt-3 inline-flex min-h-11 items-center gap-1.5 px-1 text-label-lg font-semibold text-muted hover:text-brand"
         >
           <Icon name="delete" className="text-[18px]" />
           Vaciar carrito
@@ -98,15 +98,15 @@ export function CartView({ whatsappConfigured }: { whatsappConfigured: boolean }
       </section>
 
       <aside className="lg:col-span-5">
-        <div className="space-y-5 rounded-xl border border-border-soft bg-white p-5 shadow-card md:p-6 lg:sticky lg:top-24">
+        <div className="space-y-5 rounded-3xl border border-line bg-white p-5 shadow-card md:p-6 lg:sticky lg:top-24">
           <div aria-live="polite" className={loading ? "opacity-60 transition-opacity" : "transition-opacity"}>
             <div className="flex items-baseline justify-between">
-              <span className="text-body-md text-on-surface-variant">
+              <span className="text-body-md text-muted">
                 Subtotal ({quote.unitCount} {quote.unitCount === 1 ? "par" : "pares"})
               </span>
-              <span className="font-display text-headline-sm font-bold text-primary">{formatCop(quote.totalCop)}</span>
+              <span className="font-display text-headline-sm font-bold text-ink">{formatCop(quote.totalCop)}</span>
             </div>
-            <p className="mt-1 text-label-md text-slate">
+            <p className="mt-1 text-label-md text-muted">
               El costo de envío y la forma de pago se confirman por WhatsApp.
             </p>
           </div>
@@ -127,21 +127,21 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
 
   return (
     <li className="flex gap-4 p-4">
-      <div className="relative size-24 shrink-0 overflow-hidden rounded-lg bg-surface-warm">
+      <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl bg-sand">
         {line.image && <Image src={line.image.src} alt={line.image.alt} fill sizes="96px" className="object-cover" />}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             {line.slug ? (
-              <Link href={`/producto/${line.slug}`} className="font-display text-title-sm font-semibold text-text-primary hover:underline">
+              <Link href={`/producto/${line.slug}`} className="font-display text-title-sm font-semibold text-ink hover:underline">
                 {line.name}
               </Link>
             ) : (
-              <span className="font-display text-title-sm font-semibold text-text-primary">{line.name}</span>
+              <span className="font-display text-title-sm font-semibold text-ink">{line.name}</span>
             )}
             {line.size !== null && (
-              <p className="text-label-md text-slate">
+              <p className="text-label-md text-muted">
                 {line.colorName} · Talla {line.size} · Ref. {line.reference}
               </p>
             )}
@@ -149,7 +149,7 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
           <button
             type="button"
             onClick={() => removeFromCart(line.sku)}
-            className="-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full text-slate hover:bg-surface-warm hover:text-alert-terracotta"
+            className="-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sand hover:text-brand"
             aria-label={`Quitar ${line.name}${line.size ? ` talla ${line.size}` : ""} del carrito`}
           >
             <Icon name="delete" className="text-[20px]" />
@@ -157,7 +157,7 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
         </div>
 
         {line.issue && (
-          <p className="flex items-center gap-1.5 text-label-md font-semibold text-alert-terracotta">
+          <p className="flex items-center gap-1.5 text-label-md font-semibold text-brand">
             <Icon name="error" className="text-[16px]" />
             {issueText[line.issue](line)}
           </p>
@@ -165,12 +165,12 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
 
         {line.issue !== "no_disponible" && line.issue !== "agotado" && (
           <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-1">
-            <div className="flex items-center rounded-btn border border-border-warm" role="group" aria-label={`Cantidad de ${line.name}`}>
+            <div className="flex items-center rounded-btn border border-line" role="group" aria-label={`Cantidad de ${line.name}`}>
               <button
                 type="button"
                 onClick={() => setCartQty(line.sku, qty - 1)}
                 disabled={qty <= 1}
-                className="flex size-10 items-center justify-center text-primary disabled:text-outline-variant"
+                className="flex size-10 items-center justify-center text-ink disabled:text-muted/40"
                 aria-label="Disminuir cantidad"
               >
                 <Icon name="remove" className="text-[18px]" />
@@ -180,17 +180,17 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
                 type="button"
                 onClick={() => setCartQty(line.sku, Math.min(qty + 1, maxQty))}
                 disabled={qty >= maxQty}
-                className="flex size-10 items-center justify-center text-primary disabled:text-outline-variant"
+                className="flex size-10 items-center justify-center text-ink disabled:text-muted/40"
                 aria-label="Aumentar cantidad"
               >
                 <Icon name="add" className="text-[18px]" />
               </button>
             </div>
             <p className="text-right">
-              <span className="block font-display text-price-sm font-bold text-primary-container">
+              <span className="block font-display text-price-sm font-bold text-brand">
                 {formatCop(line.unitPriceCop * qty)}
               </span>
-              {qty > 1 && <span className="text-label-md text-slate">{formatCop(line.unitPriceCop)} c/u</span>}
+              {qty > 1 && <span className="text-label-md text-muted">{formatCop(line.unitPriceCop)} c/u</span>}
             </p>
           </div>
         )}
@@ -249,21 +249,21 @@ function OrderForm({
   }
 
   const inputClass =
-    "mt-1 h-12 w-full rounded-btn border border-border-warm bg-white px-3.5 text-body-md focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/20";
+    "mt-1 h-12 w-full rounded-btn border border-line bg-white px-3.5 text-body-md focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 border-t border-border-soft pt-5">
-      <h2 className="font-display text-title-md font-semibold text-primary">Datos para tu pedido</h2>
+    <form onSubmit={handleSubmit} className="space-y-4 border-t border-line pt-5">
+      <h2 className="font-display text-title-md font-semibold text-ink">Datos para tu pedido</h2>
 
       <div>
-        <label htmlFor="name" className="text-label-lg font-semibold text-primary">
-          Nombre <span className="text-alert-terracotta" aria-hidden="true">*</span>
+        <label htmlFor="name" className="text-label-lg font-semibold text-ink">
+          Nombre <span className="text-brand" aria-hidden="true">*</span>
         </label>
         <input id="name" name="name" required minLength={2} maxLength={60} autoComplete="name" className={inputClass} />
       </div>
 
       <fieldset>
-        <legend className="text-label-lg font-semibold text-primary">¿Cómo quieres recibirlo?</legend>
+        <legend className="text-label-lg font-semibold text-ink">¿Cómo quieres recibirlo?</legend>
         <div className="mt-2 grid grid-cols-2 gap-2">
           {(
             [
@@ -274,7 +274,7 @@ function OrderForm({
             <label
               key={value}
               className={`flex min-h-12 cursor-pointer items-center gap-2 rounded-btn border px-3 text-label-lg ${
-                delivery === value ? "border-primary-container bg-surface-warm font-semibold text-primary" : "border-border-warm"
+                delivery === value ? "border-brand bg-sand font-semibold text-ink" : "border-line"
               }`}
             >
               <input
@@ -283,7 +283,7 @@ function OrderForm({
                 value={value}
                 checked={delivery === value}
                 onChange={() => setDelivery(value)}
-                className="accent-primary-container"
+                className="accent-brand"
               />
               {label}
             </label>
@@ -293,8 +293,8 @@ function OrderForm({
 
       {delivery === "domicilio" && (
         <div>
-          <label htmlFor="address" className="text-label-lg font-semibold text-primary">
-            Dirección de entrega <span className="text-alert-terracotta" aria-hidden="true">*</span>
+          <label htmlFor="address" className="text-label-lg font-semibold text-ink">
+            Dirección de entrega <span className="text-brand" aria-hidden="true">*</span>
           </label>
           <input
             id="address"
@@ -310,8 +310,8 @@ function OrderForm({
       )}
 
       <div>
-        <label htmlFor="notes" className="text-label-lg font-semibold text-primary">
-          Notas <span className="font-normal text-slate">(opcional)</span>
+        <label htmlFor="notes" className="text-label-lg font-semibold text-ink">
+          Notas <span className="font-normal text-muted">(opcional)</span>
         </label>
         <textarea
           id="notes"
@@ -326,25 +326,25 @@ function OrderForm({
       <button
         type="submit"
         disabled={disabled || sending}
-        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-btn bg-whatsapp-vibrant px-6 text-title-sm font-semibold text-navy-deep transition-colors hover:bg-[#1fbe5b] disabled:cursor-not-allowed disabled:bg-surface-warm disabled:text-on-surface-variant"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-btn bg-brand px-6 text-title-sm font-semibold text-white transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:bg-sand disabled:text-muted"
       >
         <Icon name="chat" className="text-[20px]" />
         {sending ? "Preparando pedido…" : "Enviar pedido por WhatsApp"}
       </button>
 
       {!whatsappConfigured && (
-        <p className="text-label-md text-slate">
+        <p className="text-label-md text-muted">
           El número de WhatsApp de la tienda aún no está configurado, por eso el envío está deshabilitado.
         </p>
       )}
       {whatsappConfigured && hasIssues && (
-        <p className="text-label-md text-alert-terracotta">Revisa los productos marcados antes de enviar el pedido.</p>
+        <p className="text-label-md text-brand">Revisa los productos marcados antes de enviar el pedido.</p>
       )}
 
       <div aria-live="polite">
         {message && (
           <div
-            className={`rounded-lg px-4 py-3 text-body-sm ${
+            className={`rounded-2xl px-4 py-3 text-body-sm ${
               message.kind === "ok" ? "bg-whatsapp-vibrant/10 text-whatsapp-text" : "bg-error-container text-error"
             }`}
           >
@@ -358,7 +358,7 @@ function OrderForm({
         )}
       </div>
 
-      <p className="text-label-md text-slate">
+      <p className="text-label-md text-muted">
         Tus datos solo se incluyen en el mensaje de WhatsApp; la tienda no los guarda en este sitio.
       </p>
     </form>
@@ -367,7 +367,7 @@ function OrderForm({
 
 function ErrorBox({ text }: { text: string }) {
   return (
-    <p className="mt-8 flex items-center gap-2 rounded-lg bg-error-container px-4 py-3 text-body-md text-error">
+    <p className="mt-8 flex items-center gap-2 rounded-2xl bg-error-container px-4 py-3 text-body-md text-error">
       <Icon name="error" className="text-[20px]" />
       {text}
     </p>
@@ -379,16 +379,16 @@ function CartSkeleton() {
     <div className="mt-6 grid gap-8 lg:grid-cols-12" aria-hidden="true">
       <div className="space-y-3 lg:col-span-7">
         {[0, 1].map((i) => (
-          <div key={i} className="flex gap-4 rounded-xl border border-border-soft bg-white p-4">
-            <div className="size-24 animate-pulse rounded-lg bg-surface-warm" />
+          <div key={i} className="flex gap-4 rounded-3xl border border-line bg-white p-4">
+            <div className="size-24 animate-pulse rounded-2xl bg-sand" />
             <div className="flex-1 space-y-2">
-              <div className="h-4 w-2/3 animate-pulse rounded bg-surface-warm" />
-              <div className="h-3 w-1/3 animate-pulse rounded bg-surface-warm" />
+              <div className="h-4 w-2/3 animate-pulse rounded bg-sand" />
+              <div className="h-3 w-1/3 animate-pulse rounded bg-sand" />
             </div>
           </div>
         ))}
       </div>
-      <div className="h-64 animate-pulse rounded-xl bg-white lg:col-span-5" />
+      <div className="h-64 animate-pulse rounded-3xl bg-white lg:col-span-5" />
     </div>
   );
 }

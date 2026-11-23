@@ -57,8 +57,8 @@ export function VariantPicker({ product }: { product: Product }) {
   return (
     <div className="space-y-5">
       <fieldset>
-        <legend className="text-label-lg font-semibold text-primary">
-          Color: <span className="font-normal text-on-surface-variant">{colorName}</span>
+        <legend className="text-label-lg font-semibold text-ink">
+          Color: <span className="font-normal text-muted">{colorName}</span>
         </legend>
         <div className="mt-2 flex flex-wrap gap-2">
           {product.colors.map((c) => {
@@ -70,7 +70,7 @@ export function VariantPicker({ product }: { product: Product }) {
                 aria-pressed={selected}
                 onClick={() => selectColor(c.id)}
                 className={`flex min-h-11 items-center gap-2 rounded-full border py-1.5 pl-1.5 pr-3 text-label-lg transition-colors ${
-                  selected ? "border-primary-container ring-2 ring-primary-container/25" : "border-border-warm bg-white hover:border-primary-container"
+                  selected ? "border-brand ring-2 ring-brand/25" : "border-line bg-white hover:border-brand"
                 }`}
               >
                 <span className="size-7 rounded-full ring-1 ring-black/10" style={{ backgroundColor: c.hex }} aria-hidden="true" />
@@ -83,8 +83,8 @@ export function VariantPicker({ product }: { product: Product }) {
 
       <fieldset>
         <div className="flex items-center justify-between">
-          <legend className="text-label-lg font-semibold text-primary">Talla (Colombia)</legend>
-          <Link href="/#guia-de-tallas" className="text-label-md font-semibold text-primary-container underline-offset-4 hover:underline">
+          <legend className="text-label-lg font-semibold text-ink">Talla (Colombia)</legend>
+          <Link href="/#guia-de-tallas" className="text-label-md font-semibold text-brand underline-offset-4 hover:underline">
             Guía de tallas
           </Link>
         </div>
@@ -99,12 +99,12 @@ export function VariantPicker({ product }: { product: Product }) {
                 disabled={soldOut}
                 aria-pressed={selected}
                 onClick={() => selectSize(v.size)}
-                className={`flex size-11 items-center justify-center rounded-lg border text-label-lg font-semibold transition-[transform,colors] ${
+                className={`flex size-11 items-center justify-center rounded-2xl border text-label-lg font-semibold transition-[transform,colors] ${
                   soldOut
-                    ? "cursor-not-allowed border-border-soft bg-surface-warm text-slate/60 line-through"
+                    ? "cursor-not-allowed border-line bg-sand text-muted/60 line-through"
                     : selected
-                      ? "scale-105 border-primary-container bg-primary-container text-white"
-                      : "border-border-warm bg-white text-text-primary hover:border-primary-container"
+                      ? "scale-105 border-brand bg-brand text-white"
+                      : "border-line bg-white text-ink hover:border-brand"
                 }`}
               >
                 {v.size}
@@ -113,7 +113,7 @@ export function VariantPicker({ product }: { product: Product }) {
             );
           })}
         </div>
-        <p className="mt-2 text-label-md text-slate">
+        <p className="mt-2 text-label-md text-muted">
           {variant
             ? variant.stock <= 3
               ? `¡Quedan ${variant.stock} ${variant.stock === 1 ? "par" : "pares"} en talla ${variant.size}!`
@@ -123,12 +123,12 @@ export function VariantPicker({ product }: { product: Product }) {
       </fieldset>
 
       <div className="flex flex-wrap items-stretch gap-3">
-        <div className="flex items-center rounded-btn border border-border-warm bg-white" role="group" aria-label="Cantidad">
+        <div className="flex items-center rounded-btn border border-line bg-white" role="group" aria-label="Cantidad">
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
             disabled={qty <= 1}
-            className="flex size-12 items-center justify-center text-primary disabled:text-outline-variant"
+            className="flex size-12 items-center justify-center text-ink disabled:text-muted/40"
             aria-label="Disminuir cantidad"
           >
             <Icon name="remove" className="text-[20px]" />
@@ -140,7 +140,7 @@ export function VariantPicker({ product }: { product: Product }) {
             type="button"
             onClick={() => setQty((q) => q + 1)}
             disabled={!variant || qty >= maxQty}
-            className="flex size-12 items-center justify-center text-primary disabled:text-outline-variant"
+            className="flex size-12 items-center justify-center text-ink disabled:text-muted/40"
             aria-label="Aumentar cantidad"
           >
             <Icon name="add" className="text-[20px]" />
@@ -150,7 +150,7 @@ export function VariantPicker({ product }: { product: Product }) {
         <button
           type="button"
           onClick={handleAdd}
-          className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-btn bg-primary-container px-6 text-title-sm font-semibold text-white shadow-card transition-colors hover:bg-navy-deep"
+          className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-btn bg-brand px-6 text-title-sm font-semibold text-white shadow-card transition-colors hover:bg-brand-hover"
         >
           <Icon name="shopping_bag" className="text-[20px]" />
           Agregar al carrito
@@ -160,7 +160,7 @@ export function VariantPicker({ product }: { product: Product }) {
       <div aria-live="polite">
         {status && (
           <p
-            className={`flex flex-wrap items-center gap-2 rounded-lg px-4 py-3 text-body-sm ${
+            className={`flex flex-wrap items-center gap-2 rounded-2xl px-4 py-3 text-body-sm ${
               status.kind === "ok" ? "bg-whatsapp-vibrant/10 text-whatsapp-text" : "bg-error-container text-error"
             }`}
           >

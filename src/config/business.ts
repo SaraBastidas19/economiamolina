@@ -10,9 +10,17 @@ function envOrNull(value: string | undefined): string | null {
 }
 
 export const business = {
-  /** Nombre provisional tomado del diseño de Stitch. */
-  name: "Molina Muñoz",
+  name: "Economía Molina Muñoz",
   tagline: "Calzado para toda la familia",
+  promise: "Calidad al mejor precio",
+  yearsInBusiness: 25,
+
+  /**
+   * Logo del encabezado. Guarda el archivo en public/brand/ y completa
+   * la ruta y su tamaño en píxeles; con `null` se muestra el nombre en texto.
+   * Ejemplo: { src: "/brand/logo.png", width: 480, height: 160 }
+   */
+  logo: null as { src: string; width: number; height: number } | null,
   city: "Pasto",
   region: "Nariño",
   country: "Colombia",

@@ -1,43 +1,35 @@
 @import "tailwindcss";
 
 /*
- * Tokens del sistema de diseño "Calzaturiero Tradicional" (design/DESIGN.md),
- * tomados de la exportación de Google Stitch (design/code.html).
+ * Identidad de marca de Economía Molina Muñoz (design/BRANDING.md).
+ * La escala tipográfica y la estructura vienen del diseño de Stitch (design/DESIGN.md).
  */
 @theme {
-  --color-primary: #002045;
-  --color-primary-container: #1a365d;
-  --color-on-primary: #ffffff;
-  --color-navy-deep: #0f2444;
-  --color-secondary: #904d00;
-  --color-secondary-container: #fe932c;
-  --color-heritage-gold: #d4a038;
-  --color-alert-terracotta: #c43726;
+  /* Terracota: botones y llamados a la acción */
+  --color-brand: #d53c3d;
+  --color-brand-hover: #c02b2f;
+  --color-blush: #ffebe4;
+  --color-deep: #782c1d;
+
+  /* Dorado: acentos, íconos y detalles; gold-text para texto */
+  --color-gold: #a4853c;
+  --color-gold-text: #71561f;
+  --color-gold-soft: #f9f0da;
+
+  /* Superficies y texto */
+  --color-cream: #fdf9f1;
+  --color-sand: #f4f0e7;
+  --color-line: #e2ddd5;
+  --color-ink: #241e1a;
+  --color-muted: #6f6761;
+
   --color-whatsapp-vibrant: #25d366;
-  --color-whatsapp-dark: #128c7e;
   --color-whatsapp-text: #0b6b60;
-
-  --color-canvas-cream: #fbfbfa;
-  --color-surface-warm: #f4f1ec;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #eff4ff;
-  --color-surface-container: #e5eeff;
-  --color-surface-container-high: #dce9ff;
-  --color-surface-variant: #d3e4fe;
-
-  --color-on-surface: #0b1c30;
-  --color-on-surface-variant: #43474e;
-  --color-text-primary: #1a1a1a;
-  --color-slate: #64748b;
-  --color-outline: #74777f;
-  --color-outline-variant: #c4c6cf;
-  --color-border-warm: #e2ded7;
-  --color-border-soft: #f0ede6;
   --color-error: #ba1a1a;
   --color-error-container: #ffdad6;
 
-  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 
   --text-display: 48px;
   --text-display--line-height: 56px;
@@ -77,12 +69,12 @@
   --text-price-sm: 16px;
   --text-price-sm--line-height: 22px;
 
-  --radius-btn: 10px;
+  --radius-btn: 9999px;
 
-  --shadow-card: 0 2px 8px -2px rgb(15 36 68 / 0.06), 0 1px 3px rgb(15 36 68 / 0.04);
-  --shadow-lift: 0 10px 22px -6px rgb(15 36 68 / 0.1), 0 4px 8px -2px rgb(15 36 68 / 0.05);
-  --shadow-sticky: 0 16px 36px -8px rgb(15 36 68 / 0.16), 0 6px 14px -4px rgb(15 36 68 / 0.08);
-  --shadow-modal: 0 24px 48px -12px rgb(15 36 68 / 0.22);
+  --shadow-card: 0 2px 8px -2px rgb(36 30 26 / 0.06), 0 1px 3px rgb(36 30 26 / 0.04);
+  --shadow-lift: 0 10px 22px -6px rgb(36 30 26 / 0.1), 0 4px 8px -2px rgb(36 30 26 / 0.05);
+  --shadow-sticky: 0 16px 36px -8px rgb(36 30 26 / 0.16), 0 6px 14px -4px rgb(36 30 26 / 0.08);
+  --shadow-modal: 0 24px 48px -12px rgb(36 30 26 / 0.22);
 
   --animate-fade-up: fade-up 0.5s ease-out both;
 
@@ -104,14 +96,14 @@
   }
 
   body {
-    background: var(--color-canvas-cream);
-    color: var(--color-text-primary);
+    background: var(--color-cream);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-primary-container);
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
   }
 

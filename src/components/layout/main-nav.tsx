@@ -32,8 +32,8 @@ export function MainNav() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={`rounded-full px-3 py-2 text-label-lg font-semibold transition-colors ${
-                  active ? "bg-surface-warm text-primary" : "text-on-surface-variant hover:bg-surface-warm hover:text-primary"
-                } ${link.href.endsWith("promociones") ? "text-alert-terracotta" : ""}`}
+                  active ? "bg-sand text-ink" : "text-muted hover:bg-sand hover:text-ink"
+                } ${link.href.endsWith("promociones") ? "text-brand" : ""}`}
               >
                 {link.label}
               </Link>
@@ -62,7 +62,7 @@ export function MobileMenu() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="-ml-2 flex size-11 items-center justify-center rounded-full text-primary hover:bg-surface-warm lg:hidden"
+        className="-ml-2 flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand lg:hidden"
         aria-label="Abrir menú"
         aria-haspopup="dialog"
       >
@@ -74,14 +74,14 @@ export function MobileMenu() {
         onClose={() => setOpen(false)}
         onClick={(e) => e.target === dialogRef.current && setOpen(false)}
         aria-label="Menú"
-        className="m-0 h-dvh max-h-none w-[min(85vw,340px)] max-w-none bg-white p-0 shadow-modal backdrop:bg-navy-deep/40 lg:hidden"
+        className="m-0 h-dvh max-h-none w-[min(85vw,340px)] max-w-none bg-white p-0 shadow-modal backdrop:bg-ink/40 lg:hidden"
       >
-        <div className="flex h-16 items-center justify-between border-b border-border-soft px-4">
-          <span className="font-display text-title-md font-bold text-primary">Menú</span>
+        <div className="flex h-16 items-center justify-between border-b border-line px-4">
+          <span className="font-display text-title-md font-bold text-ink">Menú</span>
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="flex size-11 items-center justify-center rounded-full text-primary hover:bg-surface-warm"
+            className="flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand"
             aria-label="Cerrar menú"
           >
             <Icon name="close" className="text-[24px]" />
@@ -97,12 +97,12 @@ export function MobileMenu() {
                     href={link.href}
                     aria-current={active ? "page" : undefined}
                     onClick={() => setOpen(false)}
-                    className={`flex min-h-12 items-center justify-between rounded-lg px-3 text-title-sm ${
-                      active ? "bg-surface-warm text-primary" : "text-text-primary hover:bg-surface-warm"
+                    className={`flex min-h-12 items-center justify-between rounded-2xl px-3 text-title-sm ${
+                      active ? "bg-sand text-ink" : "text-ink hover:bg-sand"
                     }`}
                   >
                     {link.label}
-                    <Icon name="chevron_right" className="text-[20px] text-outline" />
+                    <Icon name="chevron_right" className="text-[20px] text-muted" />
                   </Link>
                 </li>
               );

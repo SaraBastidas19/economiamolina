@@ -10,14 +10,14 @@ export function CartLink() {
   return (
     <Link
       href="/carrito"
-      className="relative flex size-11 shrink-0 items-center justify-center rounded-full text-primary hover:bg-surface-warm"
+      className="relative flex size-11 shrink-0 items-center justify-center rounded-full text-ink hover:bg-sand"
       aria-label={count > 0 ? `Carrito, ${count} ${count === 1 ? "producto" : "productos"}` : "Carrito vacío"}
     >
       <Icon name="shopping_bag" className="text-[24px]" />
       {count > 0 && (
         <span
           aria-hidden="true"
-          className="absolute right-0.5 top-0.5 flex min-w-5 items-center justify-center rounded-full bg-alert-terracotta px-1 text-label-xs font-bold text-white"
+          className="absolute right-0.5 top-0.5 flex min-w-5 items-center justify-center rounded-full bg-brand px-1 text-label-xs font-bold text-white"
         >
           {count > 99 ? "99+" : count}
         </span>

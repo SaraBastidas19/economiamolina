@@ -10,7 +10,7 @@ export function SiteFooter() {
   ].filter((item) => !!item);
 
   return (
-    <footer className="mt-auto bg-navy-deep text-white/80">
+    <footer className="mt-auto bg-deep text-white/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 md:px-8 lg:grid-cols-4 lg:px-14">
         <div>
           <p className="font-display text-headline-sm font-bold text-white">{business.name}</p>
@@ -21,7 +21,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-2 text-body-sm">
               {contact.map((item) => (
                 <li key={item.text} className="flex gap-2">
-                  <Icon name={item.icon} className="text-[18px] text-heritage-gold" />
+                  <Icon name={item.icon} className="text-[18px] text-gold-soft" />
                   {item.text}
                 </li>
               ))}
@@ -64,7 +64,7 @@ export function SiteFooter() {
 function FooterColumn({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
     <nav aria-label={title}>
-      <p className="text-label-xs font-bold uppercase tracking-wider text-heritage-gold">{title}</p>
+      <p className="text-label-xs font-bold uppercase tracking-wider text-gold-soft">{title}</p>
       <ul className="mt-4 space-y-2.5 text-body-sm">
         {links.map((link) => (
           <li key={link.href}>

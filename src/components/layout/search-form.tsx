@@ -12,7 +12,7 @@ export function SearchForm({ id = "busqueda" }: { id?: string }) {
       <label htmlFor={id} className="sr-only">
         Buscar calzado
       </label>
-      <Icon name="search" className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-outline" />
+      <Icon name="search" className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-muted" />
       <input
         key={query}
         id={id}
@@ -21,7 +21,7 @@ export function SearchForm({ id = "busqueda" }: { id?: string }) {
         defaultValue={query}
         placeholder="Buscar tenis, botas, escolar…"
         maxLength={80}
-        className="h-11 w-full rounded-full border border-border-warm bg-canvas-cream pl-10 pr-4 text-body-md text-text-primary placeholder:text-slate focus:border-primary-container focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-container/20"
+        className="h-11 w-full rounded-full border border-line bg-cream pl-10 pr-4 text-body-md text-ink placeholder:text-muted focus:border-brand focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand/20"
       />
     </Form>
   );

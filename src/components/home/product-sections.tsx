@@ -11,7 +11,8 @@ export async function NewArrivals() {
       <SectionHeading
         id="novedades"
         eyebrow="Recién llegados"
-        title="Novedades"
+        title="Novedades de la semana"
+        highlight="Novedades"
         action={{ href: "/catalogo/novedades", label: "Ver todas" }}
       />
       <ProductGrid products={products} />
@@ -24,7 +25,7 @@ export async function Promotions() {
   if (products.length === 0) return null;
 
   return (
-    <section aria-labelledby="promociones" className="bg-navy-deep py-14">
+    <section aria-labelledby="promociones" className="bg-deep py-14">
       <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-14">
         <SectionHeading
           id="promociones"

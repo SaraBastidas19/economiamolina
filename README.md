@@ -27,6 +27,16 @@ npm run lint
 GitHub Pages no sirve para esta tienda: solo publica archivos estáticos y la tienda necesita
 el servidor para validar precios e inventario del pedido (`/api/pedido`).
 
+## Marca, logo e imágenes
+
+- **Guía de marca:** [design/BRANDING.md](design/BRANDING.md). Los colores están en `src/app/globals.css` (`@theme`).
+- **Logo:** guarda el archivo en `public/brand/` (por ejemplo `logo.png` o `logo.svg`, fondo transparente)
+  y completa `logo` en `src/config/business.ts` con su ruta y tamaño en píxeles.
+- **Fotos de productos:** una carpeta por producto en `public/productos/`, nombrada con la referencia,
+  y las fotos numeradas: `public/productos/EMM-001/1.jpg`, `2.jpg`…
+  Recomendado: cuadradas (1:1), mínimo 1200 × 1200 px, JPG o WebP, fondo neutro y luz cálida,
+  nombres sin espacios ni tildes. Las fotos de demostración están en `public/demo/`.
+
 ## Estructura
 
 | Ruta | Contenido |
