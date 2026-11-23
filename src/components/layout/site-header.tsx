@@ -21,7 +21,7 @@ export function SiteHeader() {
               width={business.logo.width}
               height={business.logo.height}
               preload
-              className="h-10 w-auto md:h-12"
+              className="h-11 w-auto md:h-14"
             />
           ) : (
             <span className="leading-none">

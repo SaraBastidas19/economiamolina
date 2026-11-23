@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { business } from "@/config/business";
 import { audiences, shoeTypes } from "@/lib/taxonomy";
@@ -13,7 +14,17 @@ export function SiteFooter() {
     <footer className="mt-auto bg-deep text-white/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 md:px-8 lg:grid-cols-4 lg:px-14">
         <div>
-          <p className="font-display text-headline-sm font-bold text-white">{business.name}</p>
+          {business.logo ? (
+            <Image
+              src={business.logo.src}
+              alt={business.name}
+              width={business.logo.width}
+              height={business.logo.height}
+              className="h-16 w-auto brightness-0 invert"
+            />
+          ) : (
+            <p className="font-display text-headline-sm font-bold text-white">{business.name}</p>
+          )}
           <p className="mt-2 text-body-sm">
             {business.tagline} en {business.city}, {business.region}.
           </p>

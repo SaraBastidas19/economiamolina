@@ -20,7 +20,7 @@ export const business = {
    * la ruta y su tamaño en píxeles; con `null` se muestra el nombre en texto.
    * Ejemplo: { src: "/brand/logo.png", width: 480, height: 160 }
    */
-  logo: null as { src: string; width: number; height: number } | null,
+  logo: { src: "/brand/logo.png", width: 1332, height: 762 } as { src: string; width: number; height: number } | null,
   city: "Pasto",
   region: "Nariño",
   country: "Colombia",
