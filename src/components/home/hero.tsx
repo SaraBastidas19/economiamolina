@@ -17,15 +17,15 @@ export function Hero() {
     <section aria-labelledby="hero-title" className="mx-auto max-w-7xl px-4 pb-14 pt-8 md:px-8 md:pt-12 lg:px-14">
       <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="animate-fade-up space-y-5 lg:col-span-6">
-          <p className="inline-flex items-center gap-1.5 rounded-full bg-gold-soft px-3 py-1.5 text-label-xs font-bold uppercase tracking-wider text-gold-text">
-            <Icon name="workspace_premium" filled className="text-[16px] text-gold" />
+          <p className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1.5 text-label-xs font-bold uppercase tracking-wider text-accent-text">
+            <Icon name="workspace_premium" filled className="text-[16px] text-accent" />
             {business.promise}
           </p>
           <h1
             id="hero-title"
             className="text-balance font-display text-display-mobile font-bold tracking-tight text-ink md:text-display"
           >
-            Calzado para toda la <span className="text-brand">familia</span>
+            Calzado para toda la <span className="text-accent">familia</span>
           </h1>
           <p className="max-w-xl text-body-lg text-muted">
             Somos fábrica y tienda de calzado familiar en {business.city}, {business.region}, con más de{" "}
@@ -53,7 +53,7 @@ export function Hero() {
                 key={h.label}
                 className="flex items-center gap-1.5 rounded-2xl bg-white px-3 py-2 text-label-lg text-ink shadow-card"
               >
-                <Icon name={h.icon} className="text-[18px] text-gold" />
+                <Icon name={h.icon} className="text-[18px] text-accent" />
                 {h.label}
               </li>
             ))}

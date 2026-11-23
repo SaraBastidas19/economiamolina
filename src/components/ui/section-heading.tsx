@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/icon";
 interface SectionHeadingProps {
   eyebrow: string;
   title: string;
-  /** Palabra o frase del título que se resalta en terracota. */
+  /** Palabra o frase del título que se resalta en rosa palo. */
   highlight?: string;
   description?: string;
   id?: string;
@@ -23,7 +23,7 @@ export function SectionHeading({ eyebrow, title, highlight, description, id, act
       }`}
     >
       <div className={align === "center" ? "max-w-2xl" : "max-w-2xl"}>
-        <p className={`text-label-xs font-bold uppercase tracking-wider ${dark ? "text-gold-soft" : "text-gold-text"}`}>
+        <p className={`text-label-xs font-bold uppercase tracking-wider ${dark ? "text-accent-soft" : "text-accent-text"}`}>
           {eyebrow}
         </p>
         <h2
@@ -32,7 +32,7 @@ export function SectionHeading({ eyebrow, title, highlight, description, id, act
             dark ? "text-white" : "text-ink"
           }`}
         >
-          <HighlightedText text={title} highlight={highlight} className={dark ? "text-gold-soft" : "text-brand"} />
+          <HighlightedText text={title} highlight={highlight} className={dark ? "text-accent-soft" : "text-accent"} />
         </h2>
         {description && <p className={`mt-2 text-body-md ${dark ? "text-white/75" : "text-muted"}`}>{description}</p>}
       </div>

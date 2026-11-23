@@ -5,7 +5,7 @@ export function DemoNotice() {
   return (
     <div className="bg-deep text-white">
       <p className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-label-md font-medium">
-        <Icon name="info" className="text-[16px] text-gold-soft" />
+        <Icon name="info" className="text-[16px] text-accent-soft" />
         Tienda en preparación: productos, precios e imágenes son de demostración.
       </p>
     </div>

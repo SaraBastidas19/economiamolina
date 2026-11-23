@@ -49,7 +49,7 @@ export function ProductCard({ product, eager = false }: ProductCardProps) {
       </div>
 
       <div className="flex flex-1 flex-col gap-1.5 p-3 md:p-4">
-        <p className="text-label-xs font-bold uppercase tracking-wider text-gold-text">
+        <p className="text-label-xs font-bold uppercase tracking-wider text-accent-text">
           {typeLabel(product.type)} · {audienceLabel(product.audience)}
         </p>
         <h3 className="font-display text-title-sm font-semibold text-ink">

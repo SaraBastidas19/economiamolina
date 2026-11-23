@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
         </div>
 
         <div className="lg:col-span-5">
-          <p className="text-label-xs font-bold uppercase tracking-wider text-gold-text">
+          <p className="text-label-xs font-bold uppercase tracking-wider text-accent-text">
             {type.label} · {audience.label}
           </p>
           <h1 className="mt-1 font-display text-headline-lg-mobile font-bold tracking-tight text-ink md:text-headline-lg">
@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
           </h1>
           <p className="mt-1 text-label-md text-muted">
             Ref. {product.reference}
-            {product.isDemo && <span className="ml-2 rounded bg-sand px-1.5 py-0.5 font-semibold text-gold-text">Demostración</span>}
+            {product.isDemo && <span className="ml-2 rounded bg-sand px-1.5 py-0.5 font-semibold text-accent-text">Demostración</span>}
           </p>
 
           <PriceTag price={product.priceCop} compareAt={product.compareAtPriceCop} size="lg" className="mt-4" />

@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
 /*
- * Identidad de marca de Economía Molina Muñoz (design/BRANDING.md).
+ * Identidad de marca de Economía Molina Muñoz (design/BRANDING.md), paleta vino y rosa palo.
  * La escala tipográfica y la estructura vienen del diseño de Stitch (design/DESIGN.md).
  */
 @theme {
-  /* Terracota: botones y llamados a la acción */
-  --color-brand: #d53c3d;
-  --color-brand-hover: #c02b2f;
-  --color-blush: #ffebe4;
-  --color-deep: #782c1d;
+  /* Vino: botones y llamados a la acción */
+  --color-brand: #50181b;
+  --color-brand-hover: #320b0e;
+  --color-deep: #320b0e;
 
-  /* Dorado: acentos, íconos y detalles; gold-text para texto */
-  --color-gold: #a4853c;
-  --color-gold-text: #71561f;
-  --color-gold-soft: #f9f0da;
+  /* Rosa palo: acentos, íconos y palabra clave de los títulos */
+  --color-accent: #8f5853;
+  --color-accent-text: #7a4842;
+  --color-accent-soft: #ecdcd3;
+  --color-blush: #ecdcd3;
+  --color-beige: #cfb2a2;
 
   /* Superficies y texto */
-  --color-cream: #fdf9f1;
-  --color-sand: #f4f0e7;
-  --color-line: #e2ddd5;
+  --color-cream: #f7f1ed;
+  --color-sand: #f0e3db;
+  --color-line: #e6d6cc;
   --color-ink: #241e1a;
   --color-muted: #6f6761;
 
@@ -71,10 +72,10 @@
 
   --radius-btn: 9999px;
 
-  --shadow-card: 0 2px 8px -2px rgb(36 30 26 / 0.06), 0 1px 3px rgb(36 30 26 / 0.04);
-  --shadow-lift: 0 10px 22px -6px rgb(36 30 26 / 0.1), 0 4px 8px -2px rgb(36 30 26 / 0.05);
-  --shadow-sticky: 0 16px 36px -8px rgb(36 30 26 / 0.16), 0 6px 14px -4px rgb(36 30 26 / 0.08);
-  --shadow-modal: 0 24px 48px -12px rgb(36 30 26 / 0.22);
+  --shadow-card: 0 2px 8px -2px rgb(50 11 14 / 0.06), 0 1px 3px rgb(50 11 14 / 0.04);
+  --shadow-lift: 0 10px 22px -6px rgb(50 11 14 / 0.1), 0 4px 8px -2px rgb(50 11 14 / 0.05);
+  --shadow-sticky: 0 16px 36px -8px rgb(50 11 14 / 0.16), 0 6px 14px -4px rgb(50 11 14 / 0.08);
+  --shadow-modal: 0 24px 48px -12px rgb(50 11 14 / 0.22);
 
   --animate-fade-up: fade-up 0.5s ease-out both;
 

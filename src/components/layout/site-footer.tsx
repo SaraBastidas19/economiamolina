@@ -21,7 +21,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-2 text-body-sm">
               {contact.map((item) => (
                 <li key={item.text} className="flex gap-2">
-                  <Icon name={item.icon} className="text-[18px] text-gold-soft" />
+                  <Icon name={item.icon} className="text-[18px] text-accent-soft" />
                   {item.text}
                 </li>
               ))}
@@ -64,7 +64,7 @@ export function SiteFooter() {
 function FooterColumn({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
     <nav aria-label={title}>
-      <p className="text-label-xs font-bold uppercase tracking-wider text-gold-soft">{title}</p>
+      <p className="text-label-xs font-bold uppercase tracking-wider text-accent-soft">{title}</p>
       <ul className="mt-4 space-y-2.5 text-body-sm">
         {links.map((link) => (
           <li key={link.href}>

@@ -38,7 +38,7 @@ export function WhyUs() {
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {reasons.map((r) => (
           <li key={r.title} className="rounded-3xl border border-line bg-white p-6 shadow-card">
-            <span className="flex size-12 items-center justify-center rounded-full bg-gold-soft text-gold-text">
+            <span className="flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent-text">
               <Icon name={r.icon} className="text-[24px]" />
             </span>
             <h3 className="mt-4 font-display text-title-md font-semibold text-ink">{r.title}</h3>
@@ -77,7 +77,7 @@ export function HowToBuy() {
         </ol>
         {business.policies.paymentMethods && (
           <p className="mt-6 flex items-center justify-center gap-2 text-center text-body-md text-muted">
-            <Icon name="payments" className="text-[20px] text-gold-text" />
+            <Icon name="payments" className="text-[20px] text-accent-text" />
             Medios de pago: {business.policies.paymentMethods}
           </p>
         )}
@@ -133,7 +133,7 @@ export function SizeGuide() {
       </div>
       <div className="mt-5 flex flex-col gap-4 rounded-3xl bg-sand p-5 md:flex-row md:items-center md:justify-between">
         <p className="flex gap-2 text-body-md text-muted">
-          <Icon name="straighten" className="text-[22px] text-gold-text" />
+          <Icon name="straighten" className="text-[22px] text-accent-text" />
           Para medir tu pie, apóyalo descalzo sobre una hoja y mide desde el talón hasta la punta del dedo más largo.
         </p>
         <WhatsAppButton
@@ -193,7 +193,7 @@ export function FinalCta() {
     <section aria-labelledby="cta-final" className="bg-deep py-14 text-white">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 text-center">
         <h2 id="cta-final" className="text-balance font-display text-headline-lg-mobile font-bold md:text-headline-lg">
-          ¿Encontraste lo que buscabas? Pregúntanos por tu <span className="text-gold-soft">talla</span>
+          ¿Encontraste lo que buscabas? Pregúntanos por tu <span className="text-accent-soft">talla</span>
         </h2>
         <p className="text-body-lg text-white/80">
           Te ayudamos con modelos, colores y disponibilidad para que compres con tranquilidad.

@@ -25,7 +25,7 @@ export function SiteHeader() {
             />
           ) : (
             <span className="leading-none">
-              <span className="block text-label-xs font-bold uppercase tracking-[0.18em] text-gold-text">Economía</span>
+              <span className="block text-label-xs font-bold uppercase tracking-[0.18em] text-accent-text">Economía</span>
               <span className="mt-0.5 block font-display text-title-md font-bold text-ink md:text-headline-sm">Molina Muñoz</span>
             </span>
           )}
