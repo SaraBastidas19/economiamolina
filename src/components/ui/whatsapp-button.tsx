@@ -4,7 +4,7 @@ import { whatsappUrl } from "@/lib/whatsapp";
 interface WhatsAppButtonProps {
   message: string;
   label: string;
-  variant?: "solid" | "soft" | "light";
+  variant?: "solid" | "soft" | "light" | "outline-dark";
   size?: "md" | "lg";
   className?: string;
 }
@@ -13,6 +13,7 @@ const variants = {
   solid: "bg-brand text-white hover:bg-brand-hover",
   soft: "bg-white text-brand ring-1 ring-brand/30 hover:bg-blush",
   light: "bg-white text-deep hover:bg-blush",
+  "outline-dark": "border-2 border-accent bg-ink/25 text-white backdrop-blur-sm hover:bg-white/10",
 };
 
 const sizes = {
