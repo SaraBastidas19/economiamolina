@@ -27,7 +27,9 @@ export const ICON_NAMES = [
   "storefront",
   "straighten",
   "support_agent",
+  "swap_vert",
   "sync_alt",
+  "tune",
   "verified",
   "workspace_premium",
 ] as const;
