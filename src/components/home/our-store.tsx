@@ -14,10 +14,10 @@ export function OurStore() {
   ];
 
   return (
-    <section aria-labelledby="nuestra-tienda" className="bg-sand py-14">
+    <section aria-labelledby="nuestra-tienda" className="bg-soft py-14">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 md:px-8 lg:grid-cols-12 lg:gap-12 lg:px-14">
         <figure className="lg:col-span-7">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-cream shadow-lift">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-background shadow-lift">
             <Image
               src={storePhoto}
               alt="Fachada del Almacén La Economía con cinco asesoras de la tienda, en uniforme, sonriendo en la entrada"
@@ -52,7 +52,7 @@ export function OurStore() {
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/catalogo"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-btn bg-brand px-6 text-title-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-btn bg-primary px-6 text-title-sm font-semibold text-on-dark transition-colors hover:bg-primary-hover"
             >
               Ver catálogo
               <Icon name="arrow_forward" className="text-[20px]" />

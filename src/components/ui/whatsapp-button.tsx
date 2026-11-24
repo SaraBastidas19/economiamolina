@@ -10,10 +10,10 @@ interface WhatsAppButtonProps {
 }
 
 const variants = {
-  solid: "bg-brand text-white hover:bg-brand-hover",
-  soft: "bg-white text-brand ring-1 ring-brand/30 hover:bg-blush",
-  light: "bg-white text-deep hover:bg-blush",
-  "outline-dark": "border-2 border-accent bg-ink/25 text-white backdrop-blur-sm hover:bg-white/10",
+  solid: "bg-primary text-on-dark hover:bg-primary-hover",
+  soft: "bg-white text-primary ring-1 ring-primary/30 hover:bg-soft",
+  light: "bg-white text-dark hover:bg-soft",
+  "outline-dark": "border-2 border-accent bg-ink/25 text-on-dark backdrop-blur-sm hover:bg-white/10",
 };
 
 const sizes = {
@@ -35,7 +35,7 @@ export function WhatsAppButton({ message, label, variant = "solid", size = "md",
         type="button"
         disabled
         title="El número de WhatsApp aún no está configurado"
-        className={`${base} cursor-not-allowed bg-sand text-muted ring-1 ring-line`}
+        className={`${base} cursor-not-allowed bg-soft text-muted ring-1 ring-line`}
       >
         <Icon name="chat" className="text-[20px]" />
         <span>

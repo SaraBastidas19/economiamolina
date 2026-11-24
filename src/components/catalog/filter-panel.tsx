@@ -87,14 +87,14 @@ export function FilterPanel({ base, selection: initial, facets }: FilterPanelPro
                     onClick={() => apply({ ...selection, talla: toggle(selection.talla, size).sort((a, b) => a - b) })}
                     className={`flex h-12 w-full flex-col items-center justify-center rounded-2xl border text-label-lg font-semibold transition-colors ${
                       selected
-                        ? "border-brand bg-brand text-white"
+                        ? "border-primary bg-primary text-on-dark"
                         : disabled
-                          ? "cursor-not-allowed border-line bg-sand text-muted/50"
-                          : "border-line bg-white text-ink hover:border-brand"
+                          ? "cursor-not-allowed border-line bg-soft text-muted/50"
+                          : "border-line bg-white text-ink hover:border-primary"
                     }`}
                   >
                     {size}
-                    <span className={`text-label-xs font-medium ${selected ? "text-white/75" : "text-muted"}`}>
+                    <span className={`text-label-xs font-medium ${selected ? "text-on-dark/75" : "text-muted"}`}>
                       <span className="sr-only">, </span>
                       {count}
                       <span className="sr-only"> {count === 1 ? "producto" : "productos"}</span>
@@ -190,7 +190,7 @@ function CheckboxOption({
     <li>
       <label
         className={`flex min-h-10 items-center gap-3 rounded-2xl px-2 text-body-md ${
-          disabled ? "cursor-not-allowed text-muted/50" : "cursor-pointer text-ink hover:bg-sand"
+          disabled ? "cursor-not-allowed text-muted/50" : "cursor-pointer text-ink hover:bg-soft"
         }`}
       >
         <input
@@ -198,7 +198,7 @@ function CheckboxOption({
           checked={checked}
           disabled={disabled}
           onChange={onChange}
-          className="size-[18px] shrink-0 accent-brand"
+          className="size-[18px] shrink-0 accent-primary"
         />
         {swatch && <span aria-hidden="true" className="size-4 shrink-0 rounded-full ring-1 ring-ink/15" style={{ backgroundColor: swatch }} />}
         <span className="flex-1">{label}</span>
@@ -235,7 +235,7 @@ function PriceFilter({
   }
 
   const inputClass =
-    "h-11 w-full rounded-2xl border border-line bg-white pl-7 pr-2 text-body-md text-ink focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20";
+    "h-11 w-full rounded-2xl border border-line bg-white pl-7 pr-2 text-body-md text-ink focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20";
 
   return (
     <form onSubmit={submit} className="space-y-3">
@@ -276,7 +276,7 @@ function PriceFilter({
       <div className="flex gap-2">
         <button
           type="submit"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-btn bg-brand px-4 text-label-lg font-semibold text-white hover:bg-brand-hover"
+          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-btn bg-primary px-4 text-label-lg font-semibold text-on-dark hover:bg-primary-hover"
         >
           Aplicar
         </button>
@@ -284,7 +284,7 @@ function PriceFilter({
           <button
             type="button"
             onClick={() => onApply(undefined, undefined)}
-            className="inline-flex min-h-10 items-center justify-center rounded-btn border border-line px-4 text-label-lg font-semibold text-ink hover:bg-sand"
+            className="inline-flex min-h-10 items-center justify-center rounded-btn border border-line px-4 text-label-lg font-semibold text-ink hover:bg-soft"
           >
             Quitar
           </button>

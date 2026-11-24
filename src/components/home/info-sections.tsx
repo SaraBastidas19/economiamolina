@@ -38,7 +38,7 @@ export function WhyUs() {
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {reasons.map((r) => (
           <li key={r.title} className="rounded-3xl border border-line bg-white p-6 shadow-card">
-            <span className="flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent-text">
+            <span className="flex size-12 items-center justify-center rounded-full bg-highlight text-accent-text">
               <Icon name={r.icon} className="text-[24px]" />
             </span>
             <h3 className="mt-4 font-display text-title-md font-semibold text-ink">{r.title}</h3>
@@ -61,13 +61,13 @@ export function HowToBuy() {
   ];
 
   return (
-    <section aria-labelledby="como-comprar" className="bg-sand py-14">
+    <section aria-labelledby="como-comprar" className="bg-soft py-14">
       <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-14">
         <SectionHeading id="como-comprar" eyebrow="Proceso simple" title="Cómo comprar" highlight="comprar" align="center" />
         <ol className="grid gap-4 md:grid-cols-3 lg:gap-6">
           {steps.map((s, i) => (
             <li key={s.title} className="relative rounded-3xl bg-white p-6 shadow-card">
-              <span className="flex size-10 items-center justify-center rounded-full bg-brand font-display text-title-md font-bold text-white">
+              <span className="flex size-10 items-center justify-center rounded-full bg-primary font-display text-title-md font-bold text-on-dark">
                 {i + 1}
               </span>
               <h3 className="mt-4 font-display text-title-md font-semibold text-ink">{s.title}</h3>
@@ -109,7 +109,7 @@ export function SizeGuide() {
       <div className="overflow-x-auto rounded-3xl border border-line bg-white shadow-card">
         <table className="w-full min-w-[640px] text-left text-body-sm">
           <caption className="sr-only">Equivalencias de tallas por línea de calzado</caption>
-          <thead className="bg-sand text-label-md uppercase tracking-wide text-ink">
+          <thead className="bg-soft text-label-md uppercase tracking-wide text-ink">
             <tr>
               <th scope="col" className="px-5 py-3">Línea</th>
               <th scope="col" className="px-5 py-3">Talla Colombia</th>
@@ -131,7 +131,7 @@ export function SizeGuide() {
           </tbody>
         </table>
       </div>
-      <div className="mt-5 flex flex-col gap-4 rounded-3xl bg-sand p-5 md:flex-row md:items-center md:justify-between">
+      <div className="mt-5 flex flex-col gap-4 rounded-3xl bg-soft p-5 md:flex-row md:items-center md:justify-between">
         <p className="flex gap-2 text-body-md text-muted">
           <Icon name="straighten" className="text-[22px] text-accent-text" />
           Para medir tu pie, apóyalo descalzo sobre una hoja y mide desde el talón hasta la punta del dedo más largo.
@@ -190,12 +190,12 @@ export function Faq() {
 
 export function FinalCta() {
   return (
-    <section aria-labelledby="cta-final" className="bg-deep py-14 text-white">
+    <section aria-labelledby="cta-final" className="bg-dark py-14 text-on-dark">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 text-center">
         <h2 id="cta-final" className="text-balance font-display text-headline-lg-mobile font-bold md:text-headline-lg">
-          ¿Encontraste lo que buscabas? Pregúntanos por tu <span className="text-accent-soft">talla</span>
+          ¿Encontraste lo que buscabas? Pregúntanos por tu <span className="text-accent">talla</span>
         </h2>
-        <p className="text-body-lg text-white/80">
+        <p className="text-body-lg text-on-dark/80">
           Te ayudamos con modelos, colores y disponibilidad para que compres con tranquilidad.
         </p>
         <WhatsAppButton size="lg" variant="light" label="Consultar por WhatsApp" message="Hola, quisiera hacer una consulta sobre su calzado." />

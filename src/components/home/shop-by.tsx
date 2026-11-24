@@ -31,7 +31,7 @@ export function ShopByAudience() {
           <li key={a.value}>
             <Link
               href={`/catalogo/${a.slug}`}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-sand shadow-card"
+              className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-soft shadow-card"
             >
               <Image
                 src={audienceImages[a.value].src}
@@ -41,10 +41,10 @@ export function ShopByAudience() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
-              <span className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 text-white md:p-5">
+              <span className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 text-on-dark md:p-5">
                 <span>
                   <span className="block font-display text-headline-sm font-bold md:text-headline-md">{a.label}</span>
-                  <span className="text-label-md text-white/80">Ver modelos</span>
+                  <span className="text-label-md text-on-dark/80">Ver modelos</span>
                 </span>
                 <span className="flex size-9 items-center justify-center rounded-full bg-white/15 backdrop-blur transition-colors group-hover:bg-white group-hover:text-ink">
                   <Icon name="arrow_forward" className="text-[20px]" />
@@ -69,7 +69,7 @@ export function ShopByType() {
               href={`/catalogo/${t.slug}`}
               className="group flex flex-col items-center gap-2 rounded-3xl border border-line bg-white p-2.5 text-center shadow-card transition-shadow hover:shadow-lift"
             >
-              <span className="relative aspect-square w-full overflow-hidden rounded-2xl bg-sand">
+              <span className="relative aspect-square w-full overflow-hidden rounded-2xl bg-soft">
                 <Image
                   src={typeImages[t.value]}
                   alt=""

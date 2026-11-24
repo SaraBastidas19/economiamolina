@@ -20,7 +20,7 @@ export function ProductCard({ product, eager = false }: ProductCardProps) {
 
   return (
     <article className="group relative flex w-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lift">
-      <div className="relative aspect-[4/5] overflow-hidden bg-sand">
+      <div className="relative aspect-[4/5] overflow-hidden bg-soft">
         <Image
           src={image.src}
           alt={image.alt}
@@ -31,18 +31,18 @@ export function ProductCard({ product, eager = false }: ProductCardProps) {
         />
         <div className="absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5">
           {discount && (
-            <span className="rounded-full bg-brand px-2.5 py-1 text-label-xs font-bold uppercase text-white">
+            <span className="rounded-full bg-primary px-2.5 py-1 text-label-xs font-bold uppercase text-on-dark">
               −{discount}%
             </span>
           )}
           {product.tags.includes("nuevo") && (
-            <span className="rounded-full bg-blush px-2.5 py-1 text-label-xs font-bold uppercase text-deep">
+            <span className="rounded-full bg-highlight px-2.5 py-1 text-label-xs font-bold uppercase text-ink">
               Nuevo
             </span>
           )}
         </div>
         {soldOut && (
-          <span className="absolute inset-x-0 bottom-0 bg-ink/85 py-1.5 text-center text-label-md font-semibold text-white">
+          <span className="absolute inset-x-0 bottom-0 bg-ink/85 py-1.5 text-center text-label-md font-semibold text-on-dark">
             Agotado
           </span>
         )}

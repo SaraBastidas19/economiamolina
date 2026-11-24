@@ -70,7 +70,7 @@ async function CatalogBody({ filter, searchParams }: CatalogViewProps) {
   return (
     <>
       <header className="mt-4 max-w-2xl">
-        <h1 className="font-display text-headline-lg-mobile font-bold tracking-tight text-ink md:text-headline-lg">
+        <h1 className="font-display text-headline-lg-mobile font-bold tracking-tight text-heading md:text-headline-lg">
           {selectionTitle(selection, filter)} <span className="font-medium text-muted">({products.length})</span>
         </h1>
         <p className="mt-2 text-body-md text-muted">{filterDescription(filter)}</p>
@@ -112,7 +112,7 @@ async function CatalogBody({ filter, searchParams }: CatalogViewProps) {
               <Link
                 href={clearHref}
                 scroll={false}
-                className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-brand px-5 text-label-lg font-semibold text-white hover:bg-brand-hover"
+                className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-primary px-5 text-label-lg font-semibold text-on-dark hover:bg-primary-hover"
               >
                 Limpiar filtros
               </Link>
@@ -171,7 +171,7 @@ function ActiveFilters({
               href={chip.href}
               scroll={false}
               aria-label={`Quitar filtro: ${chip.label}`}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-line bg-white py-1 pl-3.5 pr-2 text-label-lg font-medium text-ink transition-colors hover:border-brand"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-highlight bg-highlight py-1 pl-3.5 pr-2 text-label-lg font-medium text-ink transition-colors hover:border-primary"
             >
               {chip.label}
               <Icon name="close" className="text-[16px] text-muted" />
@@ -179,7 +179,7 @@ function ActiveFilters({
           </li>
         ))}
       </ul>
-      <Link href={clearHref} scroll={false} className="px-1 text-label-lg font-semibold text-brand underline-offset-4 hover:underline">
+      <Link href={clearHref} scroll={false} className="px-1 text-label-lg font-semibold text-accent-text underline-offset-4 hover:underline">
         Limpiar todo
       </Link>
     </div>
@@ -195,7 +195,7 @@ function CatalogSkeleton({ title }: { title: string }) {
       <div className="mt-8 lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
         <div className="hidden space-y-3 lg:block" aria-hidden="true">
           {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="h-10 animate-pulse rounded-2xl bg-sand" />
+            <div key={i} className="h-10 animate-pulse rounded-2xl bg-soft" />
           ))}
         </div>
         <ProductGridSkeleton count={6} />

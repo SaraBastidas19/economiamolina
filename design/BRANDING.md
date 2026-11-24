@@ -8,31 +8,34 @@ Fuente: indicaciones de la propietaria (noviembre de 2026). Respetarlo en todo e
 
 ## Colores (tokens en `src/app/globals.css`)
 
-Paleta vino y rosa palo elegida por la propietaria (23 de noviembre de 2026), tomada de los colores
-visibles de su imagen de referencia. Los códigos escritos en esa imagen no coincidían con las franjas
-y se descartaron por decisión suya. Reemplaza la paleta terracota/dorado anterior.
+Paleta ónix, carbón, bronce y champaña (24 de noviembre de 2026). Reemplaza la paleta vino y rosa palo
+anterior: negro ónix `#000000`, carbón `#2D2D2D`, bronce `#A67C52`, champaña dorado `#D9C5A0` y
+champaña claro `#E5DFD0`.
 
 | Uso | Color | Token |
 |---|---|---|
-| Botones y llamados a la acción | `#50181B` (hover `#320B0E`) | `brand`, `brand-hover` |
-| Bloques oscuros (footer, promociones, CTA final) | `#320B0E` | `deep` |
-| Acentos, íconos y palabra clave de los títulos | `#8F5853` | `accent` |
-| Texto en rosa palo (letra pequeña) | `#7A4842` | `accent-text` |
-| Beige rosado | `#CFB2A2` | `beige` |
-| Fondo de badges y destacados | `#ECDCD3` | `blush`, `accent-soft` |
-| Secciones alternas | `#F0E3DB` | `sand` |
-| Fondo general | `#F7F1ED` | `cream` |
+| Botones principales y elementos activos (filtros, tallas, casillas) | `#000000` (hover `#2D2D2D`) | `primary`, `primary-hover` |
+| Texto sobre botones y bloques oscuros | `#E5DFD0` | `on-dark` |
+| Bloques oscuros (footer, promociones, CTA final) | `#000000` | `dark` |
+| Acentos, íconos y líneas decorativas | `#A67C52` | `accent` |
+| Palabra clave de los títulos sobre fondo claro | `#946B42` | `accent-strong` |
+| Texto en bronce (letra pequeña) | `#7A5733` | `accent-text` |
+| Badges "Nuevo", filtros activos y destacados (texto `#2D2D2D`) | `#D9C5A0` | `highlight` |
+| Secciones alternas y fondos suaves | `#E5DFD0` | `soft` |
+| Fondo general | `#F7F4EC` | `background` |
 | Tarjetas | `#FFFFFF` | `white` |
-| Bordes | `#E6D6CC` | `line` |
-| Texto principal | `#241E1A` | `ink` |
-| Texto secundario | `#6F6761` | `muted` |
+| Bordes | `#DFD2B8` | `line` |
+| Títulos grandes | `#000000` | `heading` |
+| Texto principal | `#2D2D2D` | `ink` |
+| Texto secundario | `#5C5650` | `muted` |
 
-`accent-text`, `accent-soft`, `cream` y `line` son tonos derivados de la paleta (más claros u oscuros)
-para cumplir el contraste mínimo de lectura (WCAG AA).
+`accent-strong`, `accent-text`, `background`, `line` y `muted` son tonos derivados de la paleta (más
+claros u oscuros) para cumplir el contraste mínimo de lectura (WCAG AA). Los colores de WhatsApp y de
+error no forman parte de la paleta y no se cambian.
 
 ## Tipografía y forma
 
-- Onest en todo el sitio; titulares en negrita grande con una palabra clave en rosa palo
+- Onest en todo el sitio; titulares en negrita grande con una palabra clave en bronce
   (prop `highlight` de `SectionHeading`).
 - Bordes muy redondeados (24 px → `rounded-3xl`), botones en forma de píldora, sombras suaves.
 - Fotos de producto cálidas sobre fondos neutros.

@@ -1,28 +1,33 @@
 @import "tailwindcss";
 
 /*
- * Identidad de marca de Economía Molina Muñoz (design/BRANDING.md), paleta vino y rosa palo.
+ * Identidad de marca de Economía Molina Muñoz: paleta ónix, carbón, bronce y champaña.
  * La escala tipográfica y la estructura vienen del diseño de Stitch (design/DESIGN.md).
  */
 @theme {
-  /* Vino: botones y llamados a la acción */
-  --color-brand: #50181b;
-  --color-brand-hover: #320b0e;
-  --color-deep: #320b0e;
+  /* Ónix: botones principales y elementos activos */
+  --color-primary: #000000;
+  --color-primary-hover: #2d2d2d;
+  /* Footer y bloques oscuros */
+  --color-dark: #000000;
+  /* Texto sobre fondos oscuros (champaña claro) */
+  --color-on-dark: #e5dfd0;
 
-  /* Rosa palo: acentos, íconos y palabra clave de los títulos */
-  --color-accent: #8f5853;
-  --color-accent-text: #7a4842;
-  --color-accent-soft: #ecdcd3;
-  --color-blush: #ecdcd3;
-  --color-beige: #cfb2a2;
+  /* Bronce: íconos, estrellas y líneas decorativas */
+  --color-accent: #a67c52;
+  /* Bronce oscurecido para texto sobre fondos claros (contraste WCAG AA) */
+  --color-accent-strong: #946b42; /* titulares: >= 3:1 sobre champaña */
+  --color-accent-text: #7a5733; /* texto pequeño: >= 4.5:1 sobre champaña */
+  /* Champaña dorado: badges y filtros activos */
+  --color-highlight: #d9c5a0;
 
   /* Superficies y texto */
-  --color-cream: #f7f1ed;
-  --color-sand: #f0e3db;
-  --color-line: #e6d6cc;
-  --color-ink: #241e1a;
-  --color-muted: #6f6761;
+  --color-background: #f7f4ec;
+  --color-soft: #e5dfd0;
+  --color-line: #dfd2b8;
+  --color-heading: #000000;
+  --color-ink: #2d2d2d;
+  --color-muted: #5c5650;
 
   --color-whatsapp-vibrant: #25d366;
   --color-whatsapp-text: #0b6b60;
@@ -72,10 +77,10 @@
 
   --radius-btn: 9999px;
 
-  --shadow-card: 0 2px 8px -2px rgb(50 11 14 / 0.06), 0 1px 3px rgb(50 11 14 / 0.04);
-  --shadow-lift: 0 10px 22px -6px rgb(50 11 14 / 0.1), 0 4px 8px -2px rgb(50 11 14 / 0.05);
-  --shadow-sticky: 0 16px 36px -8px rgb(50 11 14 / 0.16), 0 6px 14px -4px rgb(50 11 14 / 0.08);
-  --shadow-modal: 0 24px 48px -12px rgb(50 11 14 / 0.22);
+  --shadow-card: 0 2px 8px -2px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.04);
+  --shadow-lift: 0 10px 22px -6px rgb(0 0 0 / 0.1), 0 4px 8px -2px rgb(0 0 0 / 0.05);
+  --shadow-sticky: 0 16px 36px -8px rgb(0 0 0 / 0.16), 0 6px 14px -4px rgb(0 0 0 / 0.08);
+  --shadow-modal: 0 24px 48px -12px rgb(0 0 0 / 0.22);
 
   --animate-fade-up: fade-up 0.5s ease-out both;
   --animate-sheet-up: sheet-up 0.25s ease-out both;
@@ -107,14 +112,14 @@
   }
 
   body {
-    background: var(--color-cream);
+    background: var(--color-background);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
 

@@ -31,7 +31,7 @@ export function SortSelect({ base, selection: initial, variant = "default" }: So
           id={id}
           value={selection.orden}
           onChange={(e) => apply({ ...selection, orden: e.target.value as SortKey })}
-          className={`w-full cursor-pointer appearance-none rounded-btn border border-line bg-white text-label-lg font-semibold text-ink focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 ${
+          className={`w-full cursor-pointer appearance-none rounded-btn border border-line bg-white text-label-lg font-semibold text-ink focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
             compact ? "h-11 pl-11 pr-9" : "h-10 pl-4 pr-9"
           }`}
         >

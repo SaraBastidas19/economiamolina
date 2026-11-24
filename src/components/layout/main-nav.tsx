@@ -32,8 +32,8 @@ export function MainNav() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={`rounded-full px-3 py-2 text-label-lg font-semibold transition-colors ${
-                  active ? "bg-sand text-ink" : "text-muted hover:bg-sand hover:text-ink"
-                } ${link.href.endsWith("promociones") ? "text-brand" : ""}`}
+                  active ? "bg-soft text-ink" : "text-muted hover:bg-soft hover:text-ink"
+                } ${link.href.endsWith("promociones") ? "text-accent-text" : ""}`}
               >
                 {link.label}
               </Link>
@@ -62,7 +62,7 @@ export function MobileMenu() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="-ml-2 flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand lg:hidden"
+        className="-ml-2 flex size-11 items-center justify-center rounded-full text-ink hover:bg-soft lg:hidden"
         aria-label="Abrir menú"
         aria-haspopup="dialog"
       >
@@ -81,7 +81,7 @@ export function MobileMenu() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand"
+            className="flex size-11 items-center justify-center rounded-full text-ink hover:bg-soft"
             aria-label="Cerrar menú"
           >
             <Icon name="close" className="text-[24px]" />
@@ -98,7 +98,7 @@ export function MobileMenu() {
                     aria-current={active ? "page" : undefined}
                     onClick={() => setOpen(false)}
                     className={`flex min-h-12 items-center justify-between rounded-2xl px-3 text-title-sm ${
-                      active ? "bg-sand text-ink" : "text-ink hover:bg-sand"
+                      active ? "bg-soft text-ink" : "text-ink hover:bg-soft"
                     }`}
                   >
                     {link.label}

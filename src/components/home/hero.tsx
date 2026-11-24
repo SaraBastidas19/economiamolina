@@ -17,15 +17,15 @@ export function Hero() {
     <section aria-labelledby="hero-title" className="mx-auto max-w-7xl px-4 pb-14 pt-8 md:px-8 md:pt-12 lg:px-14">
       <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="animate-fade-up space-y-5 lg:col-span-6">
-          <p className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1.5 text-label-xs font-bold uppercase tracking-wider text-accent-text">
-            <Icon name="workspace_premium" filled className="text-[16px] text-accent" />
+          <p className="inline-flex items-center gap-1.5 rounded-full bg-highlight px-3 py-1.5 text-label-xs font-bold uppercase tracking-wider text-ink">
+            <Icon name="workspace_premium" filled className="text-[16px] text-accent-text" />
             {business.promise}
           </p>
           <h1
             id="hero-title"
-            className="text-balance font-display text-display-mobile font-bold tracking-tight text-ink md:text-display"
+            className="text-balance font-display text-display-mobile font-bold tracking-tight text-heading md:text-display"
           >
-            Calzado para toda la <span className="text-accent">familia</span>
+            Calzado para toda la <span className="text-accent-strong">familia</span>
           </h1>
           <p className="max-w-xl text-body-lg text-muted">
             Somos fábrica y tienda de calzado familiar en {business.city}, {business.region}, con más de{" "}
@@ -35,7 +35,7 @@ export function Hero() {
           <div className="flex flex-wrap gap-3 pt-1">
             <Link
               href="/catalogo"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-btn bg-brand px-6 text-title-sm font-semibold text-white shadow-card transition-colors hover:bg-brand-hover"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-btn bg-primary px-6 text-title-sm font-semibold text-on-dark shadow-card transition-colors hover:bg-primary-hover"
             >
               Ver catálogo
               <Icon name="arrow_forward" className="text-[20px]" />
@@ -61,7 +61,7 @@ export function Hero() {
         </div>
 
         <div className="relative lg:col-span-6">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-sand shadow-lift">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-soft shadow-lift">
             <Image
               src={heroImage}
               alt="Zapatos Oxford de cuero exhibidos sobre una mesa de madera en una tienda"
@@ -73,7 +73,7 @@ export function Hero() {
             />
           </div>
           <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-3xl bg-white/95 p-3 shadow-card backdrop-blur md:inset-x-6 md:bottom-6 md:p-4">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-on-dark">
               <Icon name="storefront" className="text-[20px]" />
             </span>
             <div className="min-w-0">

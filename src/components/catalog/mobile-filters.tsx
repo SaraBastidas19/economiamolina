@@ -41,7 +41,7 @@ export function MobileFilters({ base, selection, facets, total }: MobileFiltersP
           <Icon name="tune" className="text-[20px]" />
           Filtrar
           {count > 0 && (
-            <span className="flex min-w-6 items-center justify-center rounded-full bg-brand px-1.5 text-label-xs font-bold text-white">
+            <span className="flex min-w-6 items-center justify-center rounded-full bg-primary px-1.5 text-label-xs font-bold text-on-dark">
               {count}
               <span className="sr-only"> {count === 1 ? "filtro activo" : "filtros activos"}</span>
             </span>
@@ -55,7 +55,7 @@ export function MobileFilters({ base, selection, facets, total }: MobileFiltersP
         aria-labelledby={titleId}
         onClose={() => setOpen(false)}
         onClick={(e) => e.target === dialogRef.current && setOpen(false)}
-        className="m-0 mt-auto max-h-[88dvh] w-full max-w-none animate-sheet-up overflow-hidden rounded-t-3xl bg-cream p-0 shadow-modal backdrop:bg-ink/40"
+        className="m-0 mt-auto max-h-[88dvh] w-full max-w-none animate-sheet-up overflow-hidden rounded-t-3xl bg-background p-0 shadow-modal backdrop:bg-ink/40"
       >
         <div className="flex max-h-[88dvh] flex-col">
           <div className="flex items-center justify-between border-b border-line px-4 py-3">
@@ -65,7 +65,7 @@ export function MobileFilters({ base, selection, facets, total }: MobileFiltersP
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand"
+              className="flex size-11 items-center justify-center rounded-full text-ink hover:bg-soft"
               aria-label="Cerrar filtros"
             >
               <Icon name="close" className="text-[24px]" />
@@ -88,7 +88,7 @@ export function MobileFilters({ base, selection, facets, total }: MobileFiltersP
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="inline-flex min-h-12 items-center justify-center rounded-btn bg-brand px-5 text-title-sm font-semibold text-white hover:bg-brand-hover"
+              className="inline-flex min-h-12 items-center justify-center rounded-btn bg-primary px-5 text-title-sm font-semibold text-on-dark hover:bg-primary-hover"
             >
               <span aria-live="polite">
                 {pending ? "Actualizando…" : `Ver ${total} ${total === 1 ? "resultado" : "resultados"}`}

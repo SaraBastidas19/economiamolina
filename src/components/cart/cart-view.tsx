@@ -63,7 +63,7 @@ export function CartView({ whatsappConfigured }: { whatsappConfigured: boolean }
         </p>
         <Link
           href="/catalogo"
-          className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-brand px-5 text-label-lg font-semibold text-white hover:bg-brand-hover"
+          className="mt-5 inline-flex min-h-11 items-center rounded-btn bg-primary px-5 text-label-lg font-semibold text-on-dark hover:bg-primary-hover"
         >
           Ver catálogo
         </Link>
@@ -90,7 +90,7 @@ export function CartView({ whatsappConfigured }: { whatsappConfigured: boolean }
         <button
           type="button"
           onClick={() => clearCart()}
-          className="mt-3 inline-flex min-h-11 items-center gap-1.5 px-1 text-label-lg font-semibold text-muted hover:text-brand"
+          className="mt-3 inline-flex min-h-11 items-center gap-1.5 px-1 text-label-lg font-semibold text-muted hover:text-primary"
         >
           <Icon name="delete" className="text-[18px]" />
           Vaciar carrito
@@ -127,7 +127,7 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
 
   return (
     <li className="flex gap-4 p-4">
-      <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl bg-sand">
+      <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl bg-soft">
         {line.image && <Image src={line.image.src} alt={line.image.alt} fill sizes="96px" className="object-cover" />}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
@@ -149,7 +149,7 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
           <button
             type="button"
             onClick={() => removeFromCart(line.sku)}
-            className="-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sand hover:text-brand"
+            className="-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-soft hover:text-primary"
             aria-label={`Quitar ${line.name}${line.size ? ` talla ${line.size}` : ""} del carrito`}
           >
             <Icon name="delete" className="text-[20px]" />
@@ -157,7 +157,7 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
         </div>
 
         {line.issue && (
-          <p className="flex items-center gap-1.5 text-label-md font-semibold text-brand">
+          <p className="flex items-center gap-1.5 text-label-md font-semibold text-primary">
             <Icon name="error" className="text-[16px]" />
             {issueText[line.issue](line)}
           </p>
@@ -187,7 +187,7 @@ function CartLine({ line, qty }: { line: QuotedLine; qty: number }) {
               </button>
             </div>
             <p className="text-right">
-              <span className="block font-display text-price-sm font-bold text-brand">
+              <span className="block font-display text-price-sm font-bold text-primary">
                 {formatCop(line.unitPriceCop * qty)}
               </span>
               {qty > 1 && <span className="text-label-md text-muted">{formatCop(line.unitPriceCop)} c/u</span>}
@@ -249,7 +249,7 @@ function OrderForm({
   }
 
   const inputClass =
-    "mt-1 h-12 w-full rounded-btn border border-line bg-white px-3.5 text-body-md focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20";
+    "mt-1 h-12 w-full rounded-btn border border-line bg-white px-3.5 text-body-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 border-t border-line pt-5">
@@ -257,7 +257,7 @@ function OrderForm({
 
       <div>
         <label htmlFor="name" className="text-label-lg font-semibold text-ink">
-          Nombre <span className="text-brand" aria-hidden="true">*</span>
+          Nombre <span className="text-primary" aria-hidden="true">*</span>
         </label>
         <input id="name" name="name" required minLength={2} maxLength={60} autoComplete="name" className={inputClass} />
       </div>
@@ -274,7 +274,7 @@ function OrderForm({
             <label
               key={value}
               className={`flex min-h-12 cursor-pointer items-center gap-2 rounded-btn border px-3 text-label-lg ${
-                delivery === value ? "border-brand bg-sand font-semibold text-ink" : "border-line"
+                delivery === value ? "border-primary bg-soft font-semibold text-ink" : "border-line"
               }`}
             >
               <input
@@ -283,7 +283,7 @@ function OrderForm({
                 value={value}
                 checked={delivery === value}
                 onChange={() => setDelivery(value)}
-                className="accent-brand"
+                className="accent-primary"
               />
               {label}
             </label>
@@ -294,7 +294,7 @@ function OrderForm({
       {delivery === "domicilio" && (
         <div>
           <label htmlFor="address" className="text-label-lg font-semibold text-ink">
-            Dirección de entrega <span className="text-brand" aria-hidden="true">*</span>
+            Dirección de entrega <span className="text-primary" aria-hidden="true">*</span>
           </label>
           <input
             id="address"
@@ -326,7 +326,7 @@ function OrderForm({
       <button
         type="submit"
         disabled={disabled || sending}
-        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-btn bg-brand px-6 text-title-sm font-semibold text-white transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:bg-sand disabled:text-muted"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-btn bg-primary px-6 text-title-sm font-semibold text-on-dark transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-soft disabled:text-muted"
       >
         <Icon name="chat" className="text-[20px]" />
         {sending ? "Preparando pedido…" : "Enviar pedido por WhatsApp"}
@@ -338,7 +338,7 @@ function OrderForm({
         </p>
       )}
       {whatsappConfigured && hasIssues && (
-        <p className="text-label-md text-brand">Revisa los productos marcados antes de enviar el pedido.</p>
+        <p className="text-label-md text-primary">Revisa los productos marcados antes de enviar el pedido.</p>
       )}
 
       <div aria-live="polite">
@@ -380,10 +380,10 @@ function CartSkeleton() {
       <div className="space-y-3 lg:col-span-7">
         {[0, 1].map((i) => (
           <div key={i} className="flex gap-4 rounded-3xl border border-line bg-white p-4">
-            <div className="size-24 animate-pulse rounded-2xl bg-sand" />
+            <div className="size-24 animate-pulse rounded-2xl bg-soft" />
             <div className="flex-1 space-y-2">
-              <div className="h-4 w-2/3 animate-pulse rounded bg-sand" />
-              <div className="h-3 w-1/3 animate-pulse rounded bg-sand" />
+              <div className="h-4 w-2/3 animate-pulse rounded bg-soft" />
+              <div className="h-3 w-1/3 animate-pulse rounded bg-soft" />
             </div>
           </div>
         ))}

@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
 
       <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
-          <div className="relative aspect-square overflow-hidden rounded-3xl bg-sand shadow-card">
+          <div className="relative aspect-square overflow-hidden rounded-3xl bg-soft shadow-card">
             <Image
               src={mainImage.src}
               alt={mainImage.alt}
@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
               className="object-cover"
             />
             {discount && (
-              <span className="absolute left-4 top-4 rounded-full bg-brand px-3 py-1 text-label-md font-bold uppercase text-white">
+              <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-label-md font-bold uppercase text-on-dark">
                 −{discount}%
               </span>
             )}
@@ -73,7 +73,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
           {extraImages.length > 0 && (
             <ul className="mt-4 grid grid-cols-2 gap-4">
               {extraImages.map((img) => (
-                <li key={img.src} className="relative aspect-square overflow-hidden rounded-3xl bg-sand">
+                <li key={img.src} className="relative aspect-square overflow-hidden rounded-3xl bg-soft">
                   <Image src={img.src} alt={img.alt} fill sizes="(min-width: 1024px) 340px, 50vw" className="object-cover" />
                 </li>
               ))}
@@ -85,17 +85,17 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
           <p className="text-label-xs font-bold uppercase tracking-wider text-accent-text">
             {type.label} · {audience.label}
           </p>
-          <h1 className="mt-1 font-display text-headline-lg-mobile font-bold tracking-tight text-ink md:text-headline-lg">
+          <h1 className="mt-1 font-display text-headline-lg-mobile font-bold tracking-tight text-heading md:text-headline-lg">
             {product.name}
           </h1>
           <p className="mt-1 text-label-md text-muted">
             Ref. {product.reference}
-            {product.isDemo && <span className="ml-2 rounded bg-sand px-1.5 py-0.5 font-semibold text-accent-text">Demostración</span>}
+            {product.isDemo && <span className="ml-2 rounded bg-soft px-1.5 py-0.5 font-semibold text-accent-text">Demostración</span>}
           </p>
 
           <PriceTag price={product.priceCop} compareAt={product.compareAtPriceCop} size="lg" className="mt-4" />
 
-          <p className={`mt-2 flex items-center gap-1.5 text-label-lg font-semibold ${stock > 0 ? "text-whatsapp-text" : "text-brand"}`}>
+          <p className={`mt-2 flex items-center gap-1.5 text-label-lg font-semibold ${stock > 0 ? "text-whatsapp-text" : "text-primary"}`}>
             <Icon name={stock > 0 ? "check" : "close"} className="text-[18px]" />
             {stock > 0 ? "Disponible" : "Agotado"}
           </p>
@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
           </div>
 
           {product.materials && (
-            <dl className="mt-6 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 rounded-3xl bg-sand p-5 text-body-sm">
+            <dl className="mt-6 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 rounded-3xl bg-soft p-5 text-body-sm">
               {product.materials.upper && (<><dt className="font-semibold text-ink">Capellada</dt><dd>{product.materials.upper}</dd></>)}
               {product.materials.lining && (<><dt className="font-semibold text-ink">Forro</dt><dd>{product.materials.lining}</dd></>)}
               {product.materials.sole && (<><dt className="font-semibold text-ink">Suela</dt><dd>{product.materials.sole}</dd></>)}
@@ -128,7 +128,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
 
       {related.length > 0 && (
         <section aria-labelledby="relacionados" className="mt-16">
-          <h2 id="relacionados" className="mb-6 font-display text-headline-md font-bold text-ink">
+          <h2 id="relacionados" className="mb-6 font-display text-headline-md font-bold text-heading">
             También te puede interesar
           </h2>
           <ProductGrid products={related} />

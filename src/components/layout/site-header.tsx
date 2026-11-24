@@ -40,7 +40,7 @@ export function SiteHeader() {
         </div>
         <Link
           href="/catalogo"
-          className="ml-auto flex size-11 items-center justify-center rounded-full text-ink hover:bg-sand md:hidden"
+          className="ml-auto flex size-11 items-center justify-center rounded-full text-ink hover:bg-soft md:hidden"
           aria-label="Buscar en el catálogo"
         >
           <Icon name="search" className="text-[24px]" />

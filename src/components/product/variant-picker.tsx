@@ -70,7 +70,7 @@ export function VariantPicker({ product }: { product: Product }) {
                 aria-pressed={selected}
                 onClick={() => selectColor(c.id)}
                 className={`flex min-h-11 items-center gap-2 rounded-full border py-1.5 pl-1.5 pr-3 text-label-lg transition-colors ${
-                  selected ? "border-brand ring-2 ring-brand/25" : "border-line bg-white hover:border-brand"
+                  selected ? "border-primary ring-2 ring-primary/25" : "border-line bg-white hover:border-primary"
                 }`}
               >
                 <span className="size-7 rounded-full ring-1 ring-black/10" style={{ backgroundColor: c.hex }} aria-hidden="true" />
@@ -84,7 +84,7 @@ export function VariantPicker({ product }: { product: Product }) {
       <fieldset>
         <div className="flex items-center justify-between">
           <legend className="text-label-lg font-semibold text-ink">Talla (Colombia)</legend>
-          <Link href="/#guia-de-tallas" className="text-label-md font-semibold text-brand underline-offset-4 hover:underline">
+          <Link href="/#guia-de-tallas" className="text-label-md font-semibold text-accent-text underline-offset-4 hover:underline">
             Guía de tallas
           </Link>
         </div>
@@ -101,10 +101,10 @@ export function VariantPicker({ product }: { product: Product }) {
                 onClick={() => selectSize(v.size)}
                 className={`flex size-11 items-center justify-center rounded-2xl border text-label-lg font-semibold transition-[transform,colors] ${
                   soldOut
-                    ? "cursor-not-allowed border-line bg-sand text-muted/60 line-through"
+                    ? "cursor-not-allowed border-line bg-soft text-muted/60 line-through"
                     : selected
-                      ? "scale-105 border-brand bg-brand text-white"
-                      : "border-line bg-white text-ink hover:border-brand"
+                      ? "scale-105 border-primary bg-primary text-on-dark"
+                      : "border-line bg-white text-ink hover:border-primary"
                 }`}
               >
                 {v.size}
@@ -150,7 +150,7 @@ export function VariantPicker({ product }: { product: Product }) {
         <button
           type="button"
           onClick={handleAdd}
-          className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-btn bg-brand px-6 text-title-sm font-semibold text-white shadow-card transition-colors hover:bg-brand-hover"
+          className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-btn bg-primary px-6 text-title-sm font-semibold text-on-dark shadow-card transition-colors hover:bg-primary-hover"
         >
           <Icon name="shopping_bag" className="text-[20px]" />
           Agregar al carrito

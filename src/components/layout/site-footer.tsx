@@ -11,7 +11,7 @@ export function SiteFooter() {
   ].filter((item) => !!item);
 
   return (
-    <footer className="mt-auto bg-deep text-white/80">
+    <footer className="mt-auto bg-dark text-on-dark/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 md:px-8 lg:grid-cols-4 lg:px-14">
         <div>
           {business.logo ? (
@@ -23,7 +23,7 @@ export function SiteFooter() {
               className="h-16 w-auto brightness-0 invert"
             />
           ) : (
-            <p className="font-display text-headline-sm font-bold text-white">{business.name}</p>
+            <p className="font-display text-headline-sm font-bold text-on-dark">{business.name}</p>
           )}
           <p className="mt-2 text-body-sm">
             {business.tagline} en {business.city}, {business.region}.
@@ -32,7 +32,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-2 text-body-sm">
               {contact.map((item) => (
                 <li key={item.text} className="flex gap-2">
-                  <Icon name={item.icon} className="text-[18px] text-accent-soft" />
+                  <Icon name={item.icon} className="text-[18px] text-accent" />
                   {item.text}
                 </li>
               ))}
@@ -60,12 +60,12 @@ export function SiteFooter() {
         />
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-on-dark/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-label-md md:flex-row md:items-center md:justify-between md:px-8 lg:px-14">
           <p>
             © {business.name} · {business.city}, {business.region}, {business.country}
           </p>
-          <p className="text-white/60">Productos, precios e imágenes de demostración. Fotografías: StockSnap (CC0).</p>
+          <p className="text-on-dark/60">Productos, precios e imágenes de demostración. Fotografías: StockSnap (CC0).</p>
         </div>
       </div>
     </footer>
@@ -75,11 +75,11 @@ export function SiteFooter() {
 function FooterColumn({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
     <nav aria-label={title}>
-      <p className="text-label-xs font-bold uppercase tracking-wider text-accent-soft">{title}</p>
+      <p className="text-label-xs font-bold uppercase tracking-wider text-accent">{title}</p>
       <ul className="mt-4 space-y-2.5 text-body-sm">
         {links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className="hover:text-white hover:underline">
+            <Link href={link.href} className="hover:text-on-dark hover:underline">
               {link.label}
             </Link>
           </li>

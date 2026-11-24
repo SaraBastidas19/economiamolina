@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/icon";
 interface SectionHeadingProps {
   eyebrow: string;
   title: string;
-  /** Palabra o frase del título que se resalta en rosa palo. */
+  /** Palabra o frase del título que se resalta en bronce. */
   highlight?: string;
   description?: string;
   id?: string;
@@ -23,24 +23,24 @@ export function SectionHeading({ eyebrow, title, highlight, description, id, act
       }`}
     >
       <div className={align === "center" ? "max-w-2xl" : "max-w-2xl"}>
-        <p className={`text-label-xs font-bold uppercase tracking-wider ${dark ? "text-accent-soft" : "text-accent-text"}`}>
+        <p className={`text-label-xs font-bold uppercase tracking-wider ${dark ? "text-accent" : "text-accent-text"}`}>
           {eyebrow}
         </p>
         <h2
           id={id}
           className={`mt-1 font-display text-headline-lg-mobile font-bold tracking-tight md:text-headline-lg ${
-            dark ? "text-white" : "text-ink"
+            dark ? "text-on-dark" : "text-heading"
           }`}
         >
-          <HighlightedText text={title} highlight={highlight} className={dark ? "text-accent-soft" : "text-accent"} />
+          <HighlightedText text={title} highlight={highlight} className={dark ? "text-accent" : "text-accent-strong"} />
         </h2>
-        {description && <p className={`mt-2 text-body-md ${dark ? "text-white/75" : "text-muted"}`}>{description}</p>}
+        {description && <p className={`mt-2 text-body-md ${dark ? "text-on-dark/75" : "text-muted"}`}>{description}</p>}
       </div>
       {action && (
         <Link
           href={action.href}
           className={`inline-flex shrink-0 items-center gap-1 text-label-lg font-semibold underline-offset-4 hover:underline ${
-            dark ? "text-white" : "text-brand"
+            dark ? "text-on-dark" : "text-accent-text"
           }`}
         >
           {action.label}

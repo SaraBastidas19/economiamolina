@@ -21,7 +21,7 @@ export function SearchForm({ id = "busqueda" }: { id?: string }) {
         defaultValue={query}
         placeholder="Buscar tenis, botas, escolar…"
         maxLength={80}
-        className="h-11 w-full rounded-full border border-line bg-cream pl-10 pr-4 text-body-md text-ink placeholder:text-muted focus:border-brand focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand/20"
+        className="h-11 w-full rounded-full border border-line bg-background pl-10 pr-4 text-body-md text-ink placeholder:text-muted focus:border-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
     </Form>
   );
