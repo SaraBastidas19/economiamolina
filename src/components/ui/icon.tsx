@@ -9,6 +9,7 @@ export const ICON_NAMES = [
   "call",
   "chat",
   "check",
+  "chevron_left",
   "chevron_right",
   "close",
   "delete",

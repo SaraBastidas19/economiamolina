@@ -10,7 +10,7 @@ export const navLinks = [
   { href: "/catalogo/hombre", label: "Hombre" },
   { href: "/catalogo/ninos", label: "Niños" },
   { href: "/catalogo/ninas", label: "Niñas" },
-  { href: "/catalogo/novedades", label: "Novedades" },
+  { href: "/catalogo/recien-llegados", label: "Lo nuevo" },
   { href: "/catalogo/promociones", label: "Promociones" },
 ];
 

@@ -84,6 +84,17 @@
 
   --animate-fade-up: fade-up 0.5s ease-out both;
   --animate-sheet-up: sheet-up 0.25s ease-out both;
+  /* Cinta infinita: la pista contiene dos copias iguales y avanza media pista por vuelta. */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
 
   @keyframes sheet-up {
     from {

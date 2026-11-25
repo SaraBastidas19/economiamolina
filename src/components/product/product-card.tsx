@@ -10,9 +10,11 @@ interface ProductCardProps {
   product: Product;
   /** Activa la carga prioritaria para tarjetas visibles al cargar la página. */
   eager?: boolean;
+  /** -1 en las copias de la cinta infinita: siguen siendo clicables, pero el teclado no las recorre dos veces. */
+  tabIndex?: number;
 }
 
-export function ProductCard({ product, eager = false }: ProductCardProps) {
+export function ProductCard({ product, eager = false, tabIndex }: ProductCardProps) {
   const image = product.images[0];
   const discount = discountPercent(product.priceCop, product.compareAtPriceCop);
   const sizes = availableSizes(product);
@@ -53,7 +55,7 @@ export function ProductCard({ product, eager = false }: ProductCardProps) {
           {typeLabel(product.type)} · {audienceLabel(product.audience)}
         </p>
         <h3 className="font-display text-title-sm font-semibold text-ink">
-          <Link href={`/producto/${product.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
+          <Link href={`/producto/${product.slug}`} tabIndex={tabIndex} className="after:absolute after:inset-0 focus-visible:outline-none">
             {product.name}
           </Link>
         </h3>

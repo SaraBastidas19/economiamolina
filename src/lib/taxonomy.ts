@@ -51,7 +51,7 @@ export const shoeTypes: TaxonomyEntry<ShoeType>[] = [
 ];
 
 export const collections = [
-  { value: "nuevo", slug: "novedades", label: "Novedades", title: "Novedades", description: "Los modelos más recientes del catálogo." },
+  { value: "nuevo", slug: "recien-llegados", label: "Lo nuevo", title: "Lo nuevo", description: "Los modelos recién llegados al catálogo." },
   { value: "promocion", slug: "promociones", label: "Promociones", title: "Promociones", description: "Modelos con precio especial por tiempo limitado." },
 ] as const;
 

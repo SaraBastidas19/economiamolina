@@ -10,7 +10,7 @@ import type { ProductFilters, SortKey } from "@/lib/catalog";
 
 /**
  * Filtros expresados en la ruta del catálogo:
- *   /catalogo/mujer, /catalogo/botas, /catalogo/mujer/botines, /catalogo/novedades
+ *   /catalogo/mujer, /catalogo/botas, /catalogo/mujer/botines, /catalogo/recien-llegados
  */
 export interface CatalogFilter {
   audience?: (typeof audiences)[number];

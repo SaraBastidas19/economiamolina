@@ -52,7 +52,7 @@ export function SiteFooter() {
           title="Tienda"
           links={[
             { href: "/catalogo", label: "Todo el catálogo" },
-            { href: "/catalogo/novedades", label: "Novedades" },
+            { href: "/catalogo/recien-llegados", label: "Lo nuevo" },
             { href: "/catalogo/promociones", label: "Promociones" },
             { href: "/#guia-de-tallas", label: "Guía de tallas" },
             { href: "/#preguntas-frecuentes", label: "Preguntas frecuentes" },
