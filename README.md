@@ -33,9 +33,12 @@ el servidor para validar precios e inventario del pedido (`/api/pedido`).
 - **Logo:** guarda el archivo en `public/brand/` (por ejemplo `logo.png` o `logo.svg`, fondo transparente)
   y completa `logo` en `src/config/business.ts` con su ruta y tamaño en píxeles.
 - **Fotos de productos:** una carpeta por producto en `public/productos/`, nombrada con la referencia,
-  y las fotos numeradas: `public/productos/EMM-001/1.jpg`, `2.jpg`…
-  Recomendado: cuadradas (1:1), mínimo 1200 × 1200 px, JPG o WebP, fondo neutro y luz cálida,
-  nombres sin espacios ni tildes. Las fotos de demostración están en `public/demo/`.
+  y una foto por color con el nombre del color: `public/productos/EMM-001/negro.jpg`, `azul.jpg`…
+  En la ficha, al elegir un color se muestra su foto.
+  Recomendado: cuadradas (1:1), mínimo 1200 × 1200 px, JPG de unos 200 KB, fondo neutro y luz cálida,
+  nombres en minúsculas, sin espacios ni tildes. Las fotos de demostración están en `public/demo/`.
+- **Productos reales:** se registran en `src/data/products.ts` (referencia, precios por rango de tallas,
+  colores, secciones). Los de demostración están en `src/data/demo-products.ts`.
 
 ## Estructura
 

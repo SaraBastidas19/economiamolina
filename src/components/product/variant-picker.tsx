@@ -4,14 +4,17 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/types/product";
 import { addToCart, MAX_QTY_PER_LINE, useCart } from "@/lib/cart-store";
+import { priceRange, variantPriceCop } from "@/lib/pricing";
+import { formatCop } from "@/lib/format";
 import { Icon } from "@/components/ui/icon";
+import { useSelectedColor } from "@/components/product/product-gallery";
 
 type Status = { kind: "ok" | "error"; text: string } | null;
 
 export function VariantPicker({ product }: { product: Product }) {
-  const firstColorWithStock =
-    product.colors.find((c) => product.variants.some((v) => v.colorId === c.id && v.stock > 0)) ?? product.colors[0];
-  const [colorId, setColorId] = useState(firstColorWithStock.id);
+  const { colorId, setColorId } = useSelectedColor(product);
+  const prices = priceRange(product);
+  const variablePrice = prices.min < prices.max;
   const [size, setSize] = useState<number | null>(null);
   const [qty, setQty] = useState(1);
   const [status, setStatus] = useState<Status>(null);
@@ -118,8 +121,18 @@ export function VariantPicker({ product }: { product: Product }) {
             ? variant.stock <= 3
               ? `¡Quedan ${variant.stock} ${variant.stock === 1 ? "par" : "pares"} en talla ${variant.size}!`
               : `Disponible en talla ${variant.size}.`
-            : "Las tallas tachadas están agotadas."}
+            : sizes.some((v) => v.stock === 0)
+              ? "Las tallas tachadas están agotadas."
+              : variablePrice
+                ? "Elige tu talla para ver el precio."
+                : "Elige tu talla."}
         </p>
+        {variablePrice && variant && (
+          <p className="mt-3 flex items-baseline gap-2" aria-live="polite">
+            <span className="text-label-lg text-muted">Precio talla {variant.size}:</span>
+            <span className="font-display text-price-display font-bold text-ink">{formatCop(variantPriceCop(product, variant))}</span>
+          </p>
+        )}
       </fieldset>
 
       <div className="flex flex-wrap items-stretch gap-3">

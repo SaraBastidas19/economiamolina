@@ -69,7 +69,7 @@ function demo(input: DemoInput): Product {
     reference,
     name: input.name,
     description: input.description,
-    audience: input.audience,
+    audiences: [input.audience],
     type: input.type,
     priceCop: input.priceCop,
     compareAtPriceCop: input.compareAtPriceCop,

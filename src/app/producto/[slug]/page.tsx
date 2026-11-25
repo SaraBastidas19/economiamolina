@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllProductSlugs, getProductBySlug, getRelatedProducts, totalStock } from "@/lib/catalog";
 import { catalogPath } from "@/lib/catalog-filters";
-import { discountPercent } from "@/lib/format";
-import { audiences, shoeTypes } from "@/lib/taxonomy";
+import { discountPercent, formatCop } from "@/lib/format";
+import { priceBySizeRanges, priceRange } from "@/lib/pricing";
+import { audiences, audiencesLabel, shoeTypes } from "@/lib/taxonomy";
 import { Icon } from "@/components/ui/icon";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { PriceTag } from "@/components/product/price-tag";
+import { ProductGallery, SelectedColorProvider } from "@/components/product/product-gallery";
 import { ProductGrid } from "@/components/product/product-grid";
 import { VariantPicker } from "@/components/product/variant-picker";
 
@@ -32,12 +33,14 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
   const product = await getProductBySlug((await params).slug);
   if (!product) notFound();
 
-  const audience = audiences.find((a) => a.value === product.audience)!;
+  // Las migas de pan siguen la primera sección del producto.
+  const audience = audiences.find((a) => a.value === product.audiences[0])!;
   const type = shoeTypes.find((t) => t.value === product.type)!;
   const stock = totalStock(product);
   const discount = discountPercent(product.priceCop, product.compareAtPriceCop);
   const related = await getRelatedProducts(product);
-  const [mainImage, ...extraImages] = product.images;
+  const prices = priceRange(product);
+  const variablePrice = prices.min < prices.max;
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:px-8 lg:px-14">
@@ -53,37 +56,24 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
         </ol>
       </nav>
 
+      <SelectedColorProvider product={product}>
       <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
-          <div className="relative aspect-square overflow-hidden rounded-3xl bg-soft shadow-card">
-            <Image
-              src={mainImage.src}
-              alt={mainImage.alt}
-              fill
-              preload
-              sizes="(min-width: 1280px) 700px, (min-width: 1024px) 58vw, 100vw"
-              className="object-cover"
-            />
-            {discount && (
-              <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-label-md font-bold uppercase text-on-dark">
-                −{discount}%
-              </span>
-            )}
-          </div>
-          {extraImages.length > 0 && (
-            <ul className="mt-4 grid grid-cols-2 gap-4">
-              {extraImages.map((img) => (
-                <li key={img.src} className="relative aspect-square overflow-hidden rounded-3xl bg-soft">
-                  <Image src={img.src} alt={img.alt} fill sizes="(min-width: 1024px) 340px, 50vw" className="object-cover" />
-                </li>
-              ))}
-            </ul>
-          )}
+          <ProductGallery
+            product={product}
+            badge={
+              discount ? (
+                <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-label-md font-bold uppercase text-on-dark">
+                  −{discount}%
+                </span>
+              ) : undefined
+            }
+          />
         </div>
 
         <div className="lg:col-span-5">
           <p className="text-label-xs font-bold uppercase tracking-wider text-accent-text">
-            {type.label} · {audience.label}
+            {type.label} · {audiencesLabel(product.audiences)}
           </p>
           <h1 className="mt-1 font-display text-headline-lg-mobile font-bold tracking-tight text-heading md:text-headline-lg">
             {product.name}
@@ -93,7 +83,17 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
             {product.isDemo && <span className="ml-2 rounded bg-soft px-1.5 py-0.5 font-semibold text-accent-text">Demostración</span>}
           </p>
 
-          <PriceTag price={product.priceCop} compareAt={product.compareAtPriceCop} size="lg" className="mt-4" />
+          <PriceTag price={prices.min} compareAt={product.compareAtPriceCop} from={variablePrice} size="lg" className="mt-4" />
+          {variablePrice && (
+            <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 rounded-2xl bg-soft px-4 py-3 text-body-sm">
+              {priceBySizeRanges(product).map((r) => (
+                <div key={r.from} className="contents">
+                  <dt className="text-muted">{r.from === r.to ? `Talla ${r.from}` : `Tallas ${r.from} a ${r.to}`}</dt>
+                  <dd className="font-semibold text-ink">{formatCop(r.priceCop)}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
 
           <p className={`mt-2 flex items-center gap-1.5 text-label-lg font-semibold ${stock > 0 ? "text-whatsapp-text" : "text-primary"}`}>
             <Icon name={stock > 0 ? "check" : "close"} className="text-[18px]" />
@@ -125,6 +125,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
           )}
         </div>
       </div>
+      </SelectedColorProvider>
 
       {related.length > 0 && (
         <section aria-labelledby="relacionados" className="mt-16">

@@ -1,6 +1,6 @@
 /**
- * Modelo de catálogo. Hoy se alimenta con datos de demostración
- * (src/data/demo-products.ts); en la fase de backend estas mismas
+ * Modelo de catálogo. Hoy se alimenta de src/data/products.ts (productos reales)
+ * y src/data/demo-products.ts (demostración); en la fase de backend estas mismas
  * formas se leerán desde la base de datos.
  */
 
@@ -27,6 +27,8 @@ export interface ProductImage {
   alt: string;
   width: number;
   height: number;
+  /** Color que muestra la foto: la ficha la enseña al elegir ese color. */
+  colorId?: string;
 }
 
 export interface ProductColor {
@@ -42,6 +44,8 @@ export interface ProductVariant {
   /** Talla colombiana (numeración nacional). */
   size: number;
   stock: number;
+  /** Precio de esta talla en COP cuando no es el del producto (p. ej. tallas grandes más caras). */
+  priceCop?: number;
 }
 
 export interface Product {
@@ -51,9 +55,13 @@ export interface Product {
   reference: string;
   name: string;
   description: string;
-  audience: Audience;
+  /** Secciones donde aparece; un colegial unisex puede estar en varias. */
+  audiences: Audience[];
   type: ShoeType;
-  /** Precio de venta en pesos colombianos, entero y sin decimales. */
+  /**
+   * Precio de venta en pesos colombianos, entero y sin decimales. Si las tallas tienen
+   * precios distintos (`ProductVariant.priceCop`), es el menor: se muestra como "Desde".
+   */
   priceCop: number;
   /** Precio anterior en COP cuando el producto está en promoción. */
   compareAtPriceCop?: number;

@@ -62,6 +62,12 @@ export const typeBySlug = (slug: string) => shoeTypes.find((t) => t.slug === slu
 export const collectionBySlug = (slug: string) => collections.find((c) => c.slug === slug);
 
 export const audienceLabel = (value: Audience) => audiences.find((a) => a.value === value)!.label;
-export const audienceSlug = (value: Audience) => audiences.find((a) => a.value === value)!.slug;
+/** "Mujer", "Niños y niñas" o, si está en todas las secciones, "Toda la familia". */
+export function audiencesLabel(values: Audience[]): string {
+  if (audiences.every((a) => values.includes(a.value))) return "Toda la familia";
+  const labels = audiences.filter((a) => values.includes(a.value)).map((a, i) => (i === 0 ? a.label : a.label.toLowerCase()));
+  return new Intl.ListFormat("es", { type: "conjunction" }).format(labels);
+}
+export const audienceSlug =(value: Audience) => audiences.find((a) => a.value === value)!.slug;
 export const typeLabel = (value: ShoeType) => shoeTypes.find((t) => t.value === value)!.label;
 export const typeSlug = (value: ShoeType) => shoeTypes.find((t) => t.value === value)!.slug;

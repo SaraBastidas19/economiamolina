@@ -1,5 +1,14 @@
 import { demoProducts } from "@/data/demo-products";
-import { AUDIENCES, SHOE_TYPES, type Audience, type Product, type ProductTag, type ShoeType } from "@/types/product";
+import { products as realProducts } from "@/data/products";
+import { priceRange, variantPriceCop } from "@/lib/pricing";
+import {
+  AUDIENCES,
+  SHOE_TYPES,
+  type Audience,
+  type Product,
+  type ProductTag,
+  type ShoeType,
+} from "@/types/product";
 
 /*
  * Capa de acceso al catálogo. Las funciones son asíncronas a propósito:
@@ -21,18 +30,19 @@ function normalize(text: string): string {
     .trim();
 }
 
-const published = () => demoProducts.filter((p) => p.status === "publicado");
+/** Productos reales primero; los de demostración se quedan mientras crece el catálogo. */
+const published = () => [...realProducts, ...demoProducts].filter((p) => p.status === "publicado");
 
 export async function getProducts(query: CatalogQuery = {}): Promise<Product[]> {
   const terms = query.search ? normalize(query.search).split(/\s+/).filter(Boolean) : [];
 
   return published().filter((p) => {
-    if (query.audience && p.audience !== query.audience) return false;
+    if (query.audience && !p.audiences.includes(query.audience)) return false;
     if (query.type && p.type !== query.type) return false;
     if (query.tag && !p.tags.includes(query.tag)) return false;
     if (terms.length) {
       const haystack = normalize(
-        [p.name, p.reference, p.description, p.type, p.audience, ...p.colors.map((c) => c.name)].join(" "),
+        [p.name, p.reference, p.description, p.type, ...p.audiences, ...p.colors.map((c) => c.name)].join(" "),
       );
       if (!terms.every((t) => haystack.includes(t))) return false;
     }
@@ -66,7 +76,7 @@ export interface CatalogFacets {
 function searchMatches(p: Product, terms: string[]): boolean {
   if (!terms.length) return true;
   const haystack = normalize(
-    [p.name, p.reference, p.description, p.type, p.audience, ...p.colors.map((c) => c.name)].join(" "),
+    [p.name, p.reference, p.description, p.type, ...p.audiences, ...p.colors.map((c) => c.name)].join(" "),
   );
   return terms.every((t) => haystack.includes(t));
 }
@@ -75,21 +85,25 @@ const hasSizeInStock = (p: Product, size: number) => p.variants.some((v) => v.si
 
 /** Comprueba los filtros de grupo; `skip` excluye uno para calcular sus conteos. */
 function matchesGroups(p: Product, f: ProductFilters, skip?: FacetGroup): boolean {
-  if (skip !== "audiences" && f.audiences.length && !f.audiences.includes(p.audience)) return false;
+  if (skip !== "audiences" && f.audiences.length && !p.audiences.some((a) => f.audiences.includes(a))) return false;
   if (skip !== "types" && f.types.length && !f.types.includes(p.type)) return false;
   if (skip !== "sizes" && f.sizes.length && !f.sizes.some((s) => hasSizeInStock(p, s))) return false;
   if (skip !== "colors" && f.colors.length && !p.colors.some((c) => f.colors.includes(c.id))) return false;
   if (skip !== "price") {
-    if (f.priceMin !== undefined && p.priceCop < f.priceMin) return false;
-    if (f.priceMax !== undefined && p.priceCop > f.priceMax) return false;
+    // Con precios por talla, el producto entra si alguna talla cae en el rango.
+    const inRange = (price: number) =>
+      (f.priceMin === undefined || price >= f.priceMin) && (f.priceMax === undefined || price <= f.priceMax);
+    if ((f.priceMin !== undefined || f.priceMax !== undefined) && !p.variants.some((v) => inRange(variantPriceCop(p, v))))
+      return false;
   }
   return true;
 }
 
 const sorters: Record<SortKey, (a: Product, b: Product) => number> = {
   recientes: (a, b) => b.createdAt.localeCompare(a.createdAt) || a.name.localeCompare(b.name, "es"),
-  "precio-asc": (a, b) => a.priceCop - b.priceCop,
-  "precio-desc": (a, b) => b.priceCop - a.priceCop,
+  // Con precios por talla se ordena por el "desde" (ascendente) o por el mayor (descendente).
+  "precio-asc": (a, b) => priceRange(a).min - priceRange(b).min,
+  "precio-desc": (a, b) => priceRange(b).max - priceRange(a).max,
 };
 
 /**
@@ -110,7 +124,7 @@ export async function searchCatalog(
   const colors = new Map(base.flatMap((p) => p.colors).map((c) => [c.id, c]));
 
   const facets: CatalogFacets = {
-    audiences: Object.fromEntries(AUDIENCES.map((a) => [a, count("audiences", (p) => p.audience === a)])) as Record<Audience, number>,
+    audiences: Object.fromEntries(AUDIENCES.map((a) => [a, count("audiences", (p) => p.audiences.includes(a))])) as Record<Audience, number>,
     types: Object.fromEntries(SHOE_TYPES.map((t) => [t, count("types", (p) => p.type === t)])) as Record<ShoeType, number>,
     sizes: sizes.map((size) => ({ size, count: count("sizes", (p) => hasSizeInStock(p, size)) })),
     colors: [...colors.values()]
@@ -144,10 +158,12 @@ export async function getAllProductSlugs(): Promise<string[]> {
 
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
   return published()
-    .filter((p) => p.id !== product.id && (p.audience === product.audience || p.type === product.type))
-    .sort((a, b) => Number(b.audience === product.audience) - Number(a.audience === product.audience))
+    .filter((p) => p.id !== product.id && (sharesAudience(p, product) || p.type === product.type))
+    .sort((a, b) => Number(sharesAudience(b, product)) - Number(sharesAudience(a, product)))
     .slice(0, limit);
 }
+
+const sharesAudience = (a: Product, b: Product) => a.audiences.some((x) => b.audiences.includes(x));
 
 export function totalStock(product: Product): number {
   return product.variants.reduce((sum, v) => sum + v.stock, 0);

@@ -1,5 +1,6 @@
 import { business } from "@/config/business";
 import { getVariantBySku } from "@/lib/catalog";
+import { variantPriceCop } from "@/lib/pricing";
 import { formatCop } from "@/lib/format";
 
 /*
@@ -107,6 +108,8 @@ export async function quoteCart(items: CartItemInput[]): Promise<CartQuote> {
     const { product, variant, color } = found;
     const issue: LineIssue | undefined =
       variant.stock === 0 ? "agotado" : item.qty > variant.stock ? "stock_insuficiente" : undefined;
+    const unitPriceCop = variantPriceCop(product, variant);
+    const image = product.images.find((img) => img.colorId === color.id) ?? product.images[0];
 
     lines.push({
       sku: variant.sku,
@@ -115,11 +118,11 @@ export async function quoteCart(items: CartItemInput[]): Promise<CartQuote> {
       reference: product.reference,
       colorName: color.name,
       size: variant.size,
-      image: { src: product.images[0].src, alt: product.images[0].alt },
-      unitPriceCop: product.priceCop,
+      image: { src: image.src, alt: image.alt },
+      unitPriceCop,
       qty: item.qty,
       stock: variant.stock,
-      lineTotalCop: issue ? 0 : product.priceCop * item.qty,
+      lineTotalCop: issue ? 0 : unitPriceCop * item.qty,
       issue,
     });
   }
