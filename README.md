@@ -32,8 +32,11 @@ el servidor para validar precios e inventario del pedido (`/api/pedido`).
 - **Guía de marca:** [design/BRANDING.md](design/BRANDING.md). Los colores están en `src/app/globals.css` (`@theme`).
 - **Logo:** guarda el archivo en `public/brand/` (por ejemplo `logo.png` o `logo.svg`, fondo transparente)
   y completa `logo` en `src/config/business.ts` con su ruta y tamaño en píxeles.
-- **Fotos de productos:** una carpeta por producto en `public/productos/`, nombrada con la referencia,
-  y una foto por color con el nombre del color: `public/productos/EMM-001/negro.jpg`, `azul.jpg`…
+- **Fotos de productos:** una carpeta por modelo en `public/productos/`, con el nombre del zapato en
+  minúsculas y con guiones (el mismo que su dirección en la tienda), y una foto por color con el nombre
+  del color: `public/productos/colegial-vena/negro.jpg`, `azul.jpg`… Cada modelo distinto va en su
+  propia carpeta, aunque se parezca a otro. Una familia de modelos parecidos puede agruparse con una
+  subcarpeta por modelo: `public/productos/colegial-blanco/retro/blanco.jpg`.
   En la ficha, al elegir un color se muestra su foto.
   Recomendado: cuadradas (1:1), mínimo 1200 × 1200 px, JPG de unos 200 KB, fondo neutro y luz cálida,
   nombres en minúsculas, sin espacios ni tildes. Las fotos de demostración están en `public/demo/`.
