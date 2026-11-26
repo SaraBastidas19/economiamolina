@@ -32,8 +32,11 @@ interface RealProductInput {
   type: Product["type"];
   /** Precios por rango de tallas; las tallas se toman de estos rangos. */
   prices: PriceBySize[];
-  /** Colores en el orden en que se muestran; la primera foto es la de la tarjeta. */
-  colors: (ProductColor & { photoAlt: string })[];
+  /**
+   * Colores en el orden en que se muestran; la primera foto es la de la tarjeta.
+   * `morePhotoAlts` describe fotos adicionales del mismo color: <color>-2.jpg, <color>-3.jpg…
+   */
+  colors: (ProductColor & { photoAlt: string; morePhotoAlts?: string[] })[];
   tags?: Product["tags"];
   materials?: Product["materials"];
   createdAt: string;
@@ -62,13 +65,15 @@ function realProduct(input: RealProductInput): Product {
     audiences: input.audiences,
     type: input.type,
     priceCop: Math.min(...sizes.map((s) => s.priceCop)),
-    images: input.colors.map((c) => ({
-      src: `/productos/${input.photoFolder ?? input.slug}/${c.id}.jpg`,
-      alt: c.photoAlt,
-      width: 1600,
-      height: 1600,
-      colorId: c.id,
-    })),
+    images: input.colors.flatMap((c) =>
+      [c.photoAlt, ...(c.morePhotoAlts ?? [])].map((alt, i) => ({
+        src: `/productos/${input.photoFolder ?? input.slug}/${c.id}${i === 0 ? "" : `-${i + 1}`}.jpg`,
+        alt,
+        width: 1600,
+        height: 1600,
+        colorId: c.id,
+      })),
+    ),
     colors: input.colors.map(({ id, name, hex }) => ({ id, name, hex })),
     variants,
     tags: input.tags ?? [],
@@ -79,7 +84,7 @@ function realProduct(input: RealProductInput): Product {
   };
 }
 
-/** Precios de los colegiales por rango de tallas (Vena; por ahora también los blancos). */
+/** Precios por rango de tallas del Vena; por ahora los usan todos los productos reales. */
 const PRECIOS_COLEGIAL: PriceBySize[] = [
   { from: 23, to: 27, priceCop: 50000 },
   { from: 28, to: 33, priceCop: 55000 },
@@ -87,28 +92,68 @@ const PRECIOS_COLEGIAL: PriceBySize[] = [
   { from: 38, to: 42, priceCop: 70000 },
 ];
 
-/** Los colegiales se venden en todas las secciones: van de tallas de niño a adulto. */
-const TODA_LA_FAMILIA: Product["audiences"] = ["nino", "nina", "mujer", "hombre"];
+/** Los colegiales aparecen solo en las secciones Niños y Niñas. */
+const NINOS_Y_NINAS: Product["audiences"] = ["nino", "nina"];
+
+interface ColegialFamilia {
+  /** Carpeta y comienzo del slug: "colegial-blanco". */
+  folder: string;
+  /** Comienzo del nombre: "Colegial Blanco". */
+  name: string;
+  color: ProductColor;
+  /** Frase que se agrega al final de cada descripción. */
+  closing: string;
+}
+
+const BLANCO: ColegialFamilia = {
+  folder: "colegial-blanco",
+  name: "Colegial Blanco",
+  color: { id: "blanco", name: "Blanco", hex: "#f5f5f2" },
+  closing: "Todo blanco, ideal para el uniforme de educación física, en tallas de niño a adulto.",
+};
+const NEGRO: ColegialFamilia = {
+  folder: "colegial-negro",
+  name: "Colegial Negro",
+  color: { id: "negro", name: "Negro", hex: "#1f1f1f" },
+  closing: "Todo negro, para el uniforme de diario, en tallas de niño a adulto.",
+};
+const CAFE: ColegialFamilia = {
+  folder: "colegial-cafe",
+  name: "Colegial Café",
+  color: { id: "cafe", name: "Café", hex: "#5a2a24" },
+  closing: "En color café, para el uniforme de diario, en tallas de niño a adulto.",
+};
+const ELEGANTE: ColegialFamilia = {
+  folder: "colegial-elegante",
+  name: "Colegial Elegante",
+  color: { id: "negro", name: "Negro", hex: "#1f1f1f" },
+  closing: "Para el uniforme de diario o de gala, en tallas de niño a adulto.",
+};
 
 /**
- * Familia "Colegial Blanco": cada modelo es un producto propio, con su foto en
- * public/productos/colegial-blanco/<modelo>/blanco.jpg.
+ * Familia de colegiales de un solo color: cada modelo es un producto propio, con su
+ * foto en public/productos/<familia>/<modelo>/<color>.jpg.
  */
-function colegialBlanco(input: { reference: string; model: string; name: string; description: string; photoAlt: string }): Product {
+function colegial(
+  family: ColegialFamilia,
+  input: { reference: string; model: string; name: string; description: string; photoAlt: string },
+): Product {
   return realProduct({
     reference: input.reference,
-    slug: `colegial-blanco-${input.model}`,
-    photoFolder: `colegial-blanco/${input.model}`,
-    name: `Colegial Blanco ${input.name}`,
-    description: `${input.description} Todo blanco, ideal para el uniforme de educación física, en tallas de niño a adulto.`,
-    audiences: TODA_LA_FAMILIA,
+    slug: `${family.folder}-${input.model}`,
+    photoFolder: `${family.folder}/${input.model}`,
+    name: `${family.name} ${input.name}`,
+    description: `${input.description} ${family.closing}`,
+    audiences: NINOS_Y_NINAS,
     type: "escolar",
     prices: PRECIOS_COLEGIAL,
-    colors: [{ id: "blanco", name: "Blanco", hex: "#f5f5f2", photoAlt: input.photoAlt }],
+    colors: [{ ...family.color, photoAlt: input.photoAlt }],
     tags: ["nuevo"],
     createdAt: "2026-11-26",
   });
 }
+
+const colegialBlanco = (input: Parameters<typeof colegial>[1]) => colegial(BLANCO, input);
 
 export const products: Product[] = [
   realProduct({
@@ -117,7 +162,7 @@ export const products: Product[] = [
     name: "Colegial Vena",
     description:
       "Zapato colegial de cordones con capellada en cuero, costuras a la vista y suela color crema. Cómodo para toda la jornada escolar, en tallas de niño a adulto.",
-    audiences: TODA_LA_FAMILIA,
+    audiences: NINOS_Y_NINAS,
     type: "escolar",
     prices: PRECIOS_COLEGIAL,
     colors: [
@@ -136,8 +181,8 @@ export const products: Product[] = [
     name: "Colegial Mafalda",
     description:
       "Zapato colegial tipo mafalda con correa y hebilla en el empeine, costuras a la vista y punta redondeada. Cómodo para toda la jornada escolar, en tallas de niña a adulta.",
-    // Todas las secciones, empezando por Niñas (es la que usan las migas de pan).
-    audiences: ["nina", "nino", "mujer", "hombre"],
+    // Niñas primero: es la sección que usan las migas de pan.
+    audiences: ["nina", "nino"],
     type: "escolar",
     prices: PRECIOS_COLEGIAL,
     colors: [
@@ -213,5 +258,109 @@ export const products: Product[] = [
     name: "Casual",
     description: "Tenis colegial de cordones, de perfil bajo con franja lateral y suela plana.",
     photoAlt: "Par de tenis colegiales blancos de perfil bajo con franja lateral, sobre fondo beige",
+  }),
+
+  // ——— Colegial Elegante ———
+  colegial(ELEGANTE, {
+    reference: "EMM-012",
+    model: "liso",
+    name: "Liso",
+    description: "Zapato colegial negro de cordones, de punta lisa y suela gruesa.",
+    photoAlt: "Par de zapatos colegiales negros de cordones con punta lisa y suela gruesa, sobre fondo beige",
+  }),
+  colegial(ELEGANTE, {
+    reference: "EMM-013",
+    model: "puntera",
+    name: "Puntera",
+    description: "Zapato colegial negro de cordones, con costura en la puntera y cuello acolchado.",
+    photoAlt: "Par de zapatos colegiales negros de cordones con costura en la puntera, sobre fondo beige",
+  }),
+
+  // ——— Colegial Negro y Café ———
+  colegial(NEGRO, {
+    reference: "EMM-014",
+    model: "urbano",
+    name: "Urbano",
+    description: "Tenis colegial de cordones, de perfil bajo, con puntera perforada y suela gruesa.",
+    photoAlt: "Par de tenis colegiales negros de suela gruesa y puntera perforada, sobre fondo beige",
+  }),
+  colegial(CAFE, {
+    reference: "EMM-015",
+    model: "retro",
+    name: "Retro",
+    description: "Tenis colegial de cordones de estilo retro, de perfil bajo, con costuras decorativas y suela color crema.",
+    photoAlt: "Par de tenis colegiales café de estilo retro con suela color crema, sobre fondo beige",
+  }),
+
+  // ——— Tenis de tela (por ahora solo en la sección Mujer) ———
+  realProduct({
+    reference: "EMM-016",
+    slug: "tenis-tela",
+    photoFolder: "tenis-tela/tela",
+    name: "Tenis de Tela",
+    description:
+      "Tenis sin cordones en tela tejida, con cuello alto tipo media y franjas tejidas. Livianos y fáciles de poner, con suela gruesa.",
+    audiences: ["mujer"],
+    type: "tenis",
+    prices: PRECIOS_COLEGIAL,
+    colors: [
+      { id: "negro", name: "Negro suela negra", hex: "#1f1f1f",
+        photoAlt: "Par de tenis de tela negros sin cordones, con suela negra, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela negros sin cordones, con suela negra, vistos de frente sobre fondo beige"] },
+      { id: "negro-suela-blanca", name: "Negro suela blanca", hex: "#262626",
+        photoAlt: "Par de tenis de tela negros sin cordones, con suela blanca, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela negros sin cordones, con suela blanca, vistos desde arriba sobre fondo beige"] },
+      { id: "azul", name: "Azul", hex: "#1f3a8a",
+        photoAlt: "Par de tenis de tela azules sin cordones, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela azules sin cordones, vistos de frente sobre fondo beige"] },
+      { id: "blanco", name: "Blanco", hex: "#f5f5f2",
+        photoAlt: "Par de tenis de tela blancos sin cordones, vistos de frente sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela blancos sin cordones, vistos desde arriba sobre fondo beige"] },
+      { id: "palo-rosa", name: "Palo rosa", hex: "#c9aeb0",
+        photoAlt: "Par de tenis de tela palo rosa sin cordones, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela palo rosa sin cordones, vistos de frente sobre fondo beige"] },
+    ],
+    tags: ["nuevo"],
+    createdAt: "2026-11-26",
+  }),
+  realProduct({
+    reference: "EMM-017",
+    slug: "tenis-tela-corto",
+    photoFolder: "tenis-tela/corto",
+    name: "Tenis de Tela Corto",
+    description: "Tenis sin cordones en tela tejida, de cuello bajo. Livianos y fáciles de poner, con suela gruesa.",
+    audiences: ["mujer"],
+    type: "tenis",
+    prices: PRECIOS_COLEGIAL,
+    colors: [
+      { id: "azul", name: "Azul", hex: "#1f2a6b",
+        photoAlt: "Par de tenis de tela azules de cuello bajo, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela azules de cuello bajo, vistos de frente sobre fondo beige"] },
+      { id: "negro", name: "Negro", hex: "#1f1f1f",
+        photoAlt: "Par de tenis de tela negros de cuello bajo, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela negros de cuello bajo, vistos de frente sobre fondo beige"] },
+    ],
+    tags: ["nuevo"],
+    createdAt: "2026-11-26",
+  }),
+  realProduct({
+    reference: "EMM-018",
+    slug: "tenis-tela-corto-abertura",
+    photoFolder: "tenis-tela/corto-abertura",
+    name: "Tenis de Tela Corto con Abertura",
+    description:
+      "Tenis sin cordones en tela tejida, de cuello bajo y con abertura en el empeine. Livianos y fáciles de poner.",
+    audiences: ["mujer"],
+    type: "tenis",
+    prices: PRECIOS_COLEGIAL,
+    colors: [
+      { id: "negro", name: "Negro", hex: "#1f1f1f",
+        photoAlt: "Par de tenis de tela negros de cuello bajo con abertura en el empeine, vistos de lado sobre fondo beige",
+        morePhotoAlts: ["Par de tenis de tela negros de cuello bajo con abertura en el empeine, vistos de frente sobre fondo beige"] },
+      { id: "azul", name: "Azul", hex: "#1f2a6b",
+        photoAlt: "Par de tenis de tela azules de cuello bajo con abertura en el empeine, vistos de frente sobre fondo beige" },
+    ],
+    tags: ["nuevo"],
+    createdAt: "2026-11-26",
   }),
 ];

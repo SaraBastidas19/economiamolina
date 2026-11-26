@@ -18,7 +18,7 @@ const typeImages: Record<ShoeType, string> = {
   botas: "/demo/bota-alta-cafe.jpg",
   casual: "/demo/nautico-cafe.jpg",
   formal: "/demo/oxford-cafe.jpg",
-  escolar: "/demo/merceditas-negras.jpg",
+  escolar: "/productos/colegial-vena/negro.jpg",
   deportivo: "/demo/deportivo-magenta.jpg",
 };
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllProductSlugs, getProductBySlug, getRelatedProducts, totalStock } from "@/lib/catalog";
+import { availableSizes, getAllProductSlugs, getProductBySlug, getProducts, getRelatedProducts, totalStock } from "@/lib/catalog";
 import { catalogPath } from "@/lib/catalog-filters";
 import { discountPercent, formatCop } from "@/lib/format";
 import { priceBySizeRanges, priceRange } from "@/lib/pricing";
@@ -10,8 +10,9 @@ import { Icon } from "@/components/ui/icon";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { PriceTag } from "@/components/product/price-tag";
 import { ProductGallery, SelectedColorProvider } from "@/components/product/product-gallery";
+import { ProductCard } from "@/components/product/product-card";
 import { ProductGrid } from "@/components/product/product-grid";
-import { VariantPicker } from "@/components/product/variant-picker";
+import { SizePromotions, VariantPicker, type PromoSuggestion } from "@/components/product/variant-picker";
 
 export async function generateStaticParams() {
   return (await getAllProductSlugs()).map((slug) => ({ slug }));
@@ -39,6 +40,11 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
   const stock = totalStock(product);
   const discount = discountPercent(product.priceCop, product.compareAtPriceCop);
   const related = await getRelatedProducts(product);
+  // Promociones que se sugieren al elegir una talla que tengan disponible.
+  const promotions: PromoSuggestion[] = (await getProducts({ tag: "promocion" }))
+    .filter((p) => p.id !== product.id)
+    .map((p) => ({ slug: p.slug, sizes: availableSizes(p), card: <ProductCard product={p} /> }))
+    .filter((p) => p.sizes.length > 0);
   const prices = priceRange(product);
   const variablePrice = prices.min < prices.max;
 
@@ -125,6 +131,8 @@ export default async function ProductPage({ params }: PageProps<"/producto/[slug
           )}
         </div>
       </div>
+      {/* A todo el ancho, debajo de la foto y los datos: aparece al elegir una talla. */}
+      <SizePromotions product={product} promotions={promotions} />
       </SelectedColorProvider>
 
       {related.length > 0 && (

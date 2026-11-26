@@ -16,6 +16,7 @@ export const ICON_NAMES = [
   "error",
   "expand_more",
   "info",
+  "local_offer",
   "local_shipping",
   "location_on",
   "menu",

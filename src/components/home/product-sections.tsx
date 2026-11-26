@@ -12,7 +12,7 @@ const MIN_ITEMS_PER_HALF = 6;
 const EAGER_ITEMS = 4;
 
 export async function NewArrivals() {
-  const products = (await getProducts({ tag: "nuevo" })).slice(0, 12);
+  const products = (await getProducts({ tag: "nuevo" })).slice(0, 20);
   if (products.length === 0) return null;
 
   // Cinta = dos mitades idénticas. Si hay pocos productos, se repiten dentro de cada mitad.

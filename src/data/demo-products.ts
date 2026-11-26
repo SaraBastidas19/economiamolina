@@ -53,6 +53,8 @@ interface DemoInput {
   sizes: number[];
   tags?: ProductTag[];
   materials?: Product["materials"];
+  /** "archivado" lo oculta del sitio sin borrarlo. */
+  status?: Product["status"];
 }
 
 let counter = 0;
@@ -77,7 +79,7 @@ function demo(input: DemoInput): Product {
     colors: input.colors,
     variants: buildVariants(reference, input.colors, input.sizes),
     tags,
-    status: "publicado",
+    status: input.status ?? "publicado",
     materials: input.materials,
     isDemo: true,
     createdAt: `2026-10-${String(1 + (counter % 20)).padStart(2, "0")}`,
@@ -357,6 +359,8 @@ export const demoProducts: Product[] = [
     audience: "nino",
     type: "escolar",
     priceCop: 89900,
+    // Escolar muestra solo productos reales del almacén.
+    status: "archivado",
     photos: [{ file: "derby-negro", alt: "Zapatos negros de cordones en cuero brillante" }],
     colors: [C.negro],
     sizes: range(27, 38),
@@ -397,6 +401,8 @@ export const demoProducts: Product[] = [
     audience: "nina",
     type: "escolar",
     priceCop: 84900,
+    // Escolar muestra solo productos reales del almacén.
+    status: "archivado",
     photos: [{ file: "merceditas-negras", alt: "Zapatos negros tipo mercedita con medias a rayas" }],
     colors: [C.negro],
     sizes: range(27, 38),

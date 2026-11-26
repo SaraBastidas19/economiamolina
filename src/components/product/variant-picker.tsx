@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { Product } from "@/types/product";
 import { addToCart, MAX_QTY_PER_LINE, useCart } from "@/lib/cart-store";
 import { priceRange, variantPriceCop } from "@/lib/pricing";
@@ -11,11 +11,22 @@ import { useSelectedColor } from "@/components/product/product-gallery";
 
 type Status = { kind: "ok" | "error"; text: string } | null;
 
+/** Producto en promoción que se sugiere si tiene disponible la talla elegida. */
+export interface PromoSuggestion {
+  slug: string;
+  /** Tallas con al menos un par disponible. */
+  sizes: number[];
+  /** Tarjeta ya armada en el servidor (la misma del catálogo). */
+  card: ReactNode;
+}
+
+/** Cuántas promociones se sugieren como máximo. */
+const MAX_SUGGESTIONS = 4;
+
 export function VariantPicker({ product }: { product: Product }) {
-  const { colorId, setColorId } = useSelectedColor(product);
+  const { colorId, setColorId, size, setSize } = useSelectedColor(product);
   const prices = priceRange(product);
   const variablePrice = prices.min < prices.max;
-  const [size, setSize] = useState<number | null>(null);
   const [qty, setQty] = useState(1);
   const [status, setStatus] = useState<Status>(null);
   const cart = useCart();
@@ -188,5 +199,32 @@ export function VariantPicker({ product }: { product: Product }) {
         )}
       </div>
     </div>
+  );
+}
+
+/**
+ * Promociones con pares en la talla elegida en el selector. Va debajo de la foto y los
+ * datos del producto, a todo el ancho de la página.
+ */
+export function SizePromotions({ product, promotions }: { product: Product; promotions: PromoSuggestion[] }) {
+  const { size } = useSelectedColor(product);
+  const suggestions = size === null ? [] : promotions.filter((p) => p.sizes.includes(size)).slice(0, MAX_SUGGESTIONS);
+  if (size === null || suggestions.length === 0) return null;
+
+  return (
+    <section aria-labelledby="promos-talla" className="mt-12 border-t border-line pt-8">
+      <h2 id="promos-talla" className="flex items-center gap-2 font-display text-headline-md font-bold text-heading">
+        <Icon name="local_offer" className="text-[24px] text-accent" />
+        En promoción en tu talla {size}
+      </h2>
+      <p className="mt-1 text-body-md text-muted">Estos modelos tienen descuento y hay pares disponibles en talla {size}.</p>
+      <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
+        {suggestions.map((p) => (
+          <li key={p.slug} className="flex">
+            {p.card}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
