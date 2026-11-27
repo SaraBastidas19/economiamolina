@@ -3,7 +3,7 @@ import Link from "next/link";
 import { business } from "@/config/business";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
-import heroImage from "../../../public/demo/hero-tienda.jpg";
+import heroImage from "../../../public/brand/portada-tienda.jpg";
 
 const highlights: { icon: IconName; label: string }[] = [
   { icon: "workspace_premium", label: `Más de ${business.yearsInBusiness} años` },
@@ -64,7 +64,7 @@ export function Hero() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-soft shadow-lift">
             <Image
               src={heroImage}
-              alt="Zapatos Oxford de cuero exhibidos sobre una mesa de madera en una tienda"
+              alt="Fachada del almacén Economía Molina Muñoz con su letrero, la puerta abierta y vitrinas llenas de calzado"
               fill
               preload
               placeholder="blur"

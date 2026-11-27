@@ -20,6 +20,7 @@ const typeImages: Record<ShoeType, string> = {
   formal: "/demo/oxford-cafe.jpg",
   escolar: "/productos/colegial-vena/negro.jpg",
   deportivo: "/demo/deportivo-magenta.jpg",
+  sandalias: "/productos/sandalias/flores/surtido.jpg",
 };
 
 export function ShopByAudience() {

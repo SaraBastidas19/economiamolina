@@ -13,15 +13,25 @@ const paperTexture = `url("data:image/svg+xml,${encodeURIComponent(
 const perforation = "border-dashed border-accent/45";
 
 /**
- * Banner de temporada: franja tipo cupón recortable (ónix) sobre una foto
- * de familia, con eslogan y llamados a la acción.
+ * Banner de temporada: foto ancha de la tienda con eslogan y llamados a la acción,
+ * y encima (si `promotion.showCoupon`) una franja tipo cupón recortable (ónix).
  */
 export function PromoBanner() {
   return (
     <section aria-labelledby="promo-titulo" className="relative">
-      <StampFilter />
+      {promotion.showCoupon && <CouponStrip />}
 
-      {/* Franja tipo cupón */}
+      {/* Fotografía con llamada a la acción */}
+      <PhotoWithCta />
+    </section>
+  );
+}
+
+/** Franja tipo cupón con la vigencia, el titular de la promoción y el logo. */
+function CouponStrip() {
+  return (
+    <>
+      <StampFilter />
       <div className={`relative overflow-hidden border-b-2 bg-primary text-on-dark ${perforation}`}>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.13] mix-blend-overlay" style={{ backgroundImage: paperTexture }} />
         {/* Muescas de ticket en los extremos de la línea de corte */}
@@ -72,18 +82,23 @@ export function PromoBanner() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
 
-      {/* Fotografía con llamada a la acción */}
+function PhotoWithCta() {
+  return (
       <div className="relative">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-soft sm:aspect-[16/9] lg:aspect-[16/6]">
-          {/* Anclada abajo: el calzado es el protagonista */}
+          {/* El punto de recorte depende de la foto (promotion.image.position) */}
           <Image
             src={promotion.image.src}
             alt={promotion.image.alt}
             fill
             preload
             sizes="100vw"
-            className="object-cover object-bottom"
+            className="object-cover"
+            style={{ objectPosition: promotion.image.position }}
           />
           <div aria-hidden="true" className="absolute inset-0 hidden bg-gradient-to-tr from-ink/80 via-ink/20 to-transparent sm:block" />
         </div>
@@ -112,7 +127,6 @@ export function PromoBanner() {
           </div>
         </div>
       </div>
-    </section>
   );
 }
 

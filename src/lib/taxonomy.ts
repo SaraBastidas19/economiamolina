@@ -48,6 +48,7 @@ export const shoeTypes: TaxonomyEntry<ShoeType>[] = [
   { value: "formal", slug: "formal", label: "Formal", title: "Zapatos formales", description: "Zapatos formales para oficina y eventos." },
   { value: "escolar", slug: "escolar", label: "Escolar", title: "Zapatos escolares", description: "Zapatos colegiales y tenis para educación física." },
   { value: "deportivo", slug: "deportivo", label: "Deportivo", title: "Calzado deportivo", description: "Calzado para correr, entrenar y hacer deporte." },
+  { value: "sandalias", slug: "sandalias", label: "Sandalias", title: "Sandalias", description: "Sandalias frescas y cómodas para el día a día." },
 ];
 
 export const collections = [

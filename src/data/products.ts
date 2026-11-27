@@ -155,6 +155,38 @@ function colegial(
 
 const colegialBlanco = (input: Parameters<typeof colegial>[1]) => colegial(BLANCO, input);
 
+/** Foto de grupo con varios modelos: el cliente indica cuál quiere en el pedido o por WhatsApp. */
+const VARIOS_MODELOS: ProductColor = { id: "surtido", name: "Varios modelos", hex: "#c8b8a6" };
+const ELIGE_MODELO = "Al hacer tu pedido, indica en las notas cuál modelo y color prefieres, o escríbenos por WhatsApp.";
+
+/**
+ * Producto que agrupa varios modelos en una sola foto, en
+ * public/productos/<familia>/<modelo>/surtido.jpg.
+ */
+function surtido(input: {
+  reference: string;
+  family: "sandalias" | "tenis-deportivos";
+  model: string;
+  name: string;
+  description: string;
+  photoAlt: string;
+}): Product {
+  const sandalias = input.family === "sandalias";
+  return realProduct({
+    reference: input.reference,
+    slug: `${input.family}-${input.model}`,
+    photoFolder: `${input.family}/${input.model}`,
+    name: input.name,
+    description: `${input.description} ${ELIGE_MODELO}`,
+    audiences: sandalias ? ["nina"] : ["mujer"],
+    type: sandalias ? "sandalias" : "deportivo",
+    prices: PRECIOS_COLEGIAL,
+    colors: [{ ...VARIOS_MODELOS, photoAlt: input.photoAlt }],
+    tags: ["nuevo"],
+    createdAt: "2026-11-27",
+  });
+}
+
 export const products: Product[] = [
   realProduct({
     reference: "EMM-001",
@@ -362,5 +394,69 @@ export const products: Product[] = [
     ],
     tags: ["nuevo"],
     createdAt: "2026-11-26",
+  }),
+
+  // ——— Sandalias para niña (cada foto reúne varios modelos) ———
+  surtido({
+    reference: "EMM-019", family: "sandalias", model: "trenzadas", name: "Sandalias Trenzadas",
+    description: "Sandalias para niña con tiras trenzadas y hebilla al tobillo, en tonos dorado, lila y azul.",
+    photoAlt: "Tres pares de sandalias para niña con tiras trenzadas en dorado, lila y azul, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-020", family: "sandalias", model: "flores", name: "Sandalias con Flores",
+    description: "Sandalias para niña con apliques de flores y correa al tobillo, en rosado metalizado, plateado y dorado.",
+    photoAlt: "Tres pares de sandalias para niña con apliques de flores en rosado metalizado, plateado y dorado, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-021", family: "sandalias", model: "brillantes", name: "Sandalias Brillantes",
+    description: "Sandalias para niña con tiras brillantes y correa al tobillo, en negro, plateado y azul.",
+    photoAlt: "Tres pares de sandalias para niña con tiras brillantes en negro, plateado y azul, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-022", family: "sandalias", model: "tejidas", name: "Sandalias Tejidas",
+    description: "Sandalias para niña con tiras tejidas y brillantes, en dorado, multicolor y rosado.",
+    photoAlt: "Tres pares de sandalias para niña con tiras tejidas en dorado, multicolor y rosado, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-023", family: "sandalias", model: "metalizadas", name: "Sandalias Metalizadas",
+    description: "Sandalias para niña con tiras metalizadas y detalles brillantes, en dorado, blanco, rosado y azul.",
+    photoAlt: "Cuatro pares de sandalias para niña metalizadas en dorado, blanco, rosado y azul, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-024", family: "sandalias", model: "clasicas", name: "Sandalias Clásicas",
+    description: "Sandalias para niña de suela plana con correa al tobillo, en blanco, rosado y azul.",
+    photoAlt: "Varios pares de sandalias para niña de suela plana en blanco, rosado y azul, sobre fondo beige",
+  }),
+
+  // ——— Tenis deportivos de suela gruesa (cada foto reúne varios colores) ———
+  surtido({
+    reference: "EMM-025", family: "tenis-deportivos", model: "pastel", name: "Tenis Deportivo Pastel",
+    description: "Tenis deportivos de cordones con suela gruesa, en beige, crema y azul con detalles rosados.",
+    photoAlt: "Tres tenis deportivos de suela gruesa en beige, crema y azul, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-026", family: "tenis-deportivos", model: "oscuro", name: "Tenis Deportivo Oscuro",
+    description: "Tenis deportivos de cordones con suela gruesa, en negro, azul oscuro y gris.",
+    photoAlt: "Cuatro tenis deportivos de suela gruesa en negro, azul oscuro y gris, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-027", family: "tenis-deportivos", model: "gris", name: "Tenis Deportivo Gris",
+    description: "Tenis deportivos de cordones con suela gruesa, en gris con detalles menta, rosados y lila.",
+    photoAlt: "Cinco tenis deportivos grises de suela gruesa con detalles de colores, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-028", family: "tenis-deportivos", model: "detalles", name: "Tenis Deportivo Detalles de Color",
+    description: "Tenis deportivos de cordones con suela gruesa, blancos con detalles celestes, rosados y lila.",
+    photoAlt: "Cuatro tenis deportivos blancos de suela gruesa con detalles celestes, rosados y lila, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-029", family: "tenis-deportivos", model: "blanco", name: "Tenis Deportivo Blanco",
+    description: "Tenis deportivos de cordones con suela gruesa, blancos con detalles rosados, lila y negros.",
+    photoAlt: "Cuatro tenis deportivos blancos de suela gruesa con detalles rosados, lila y negros, sobre fondo beige",
+  }),
+  surtido({
+    reference: "EMM-030", family: "tenis-deportivos", model: "plataforma", name: "Tenis Deportivo Plataforma",
+    description: "Tenis deportivos de cordones con suela de plataforma, blancos con detalles azules, fucsia y dorados.",
+    photoAlt: "Cuatro tenis deportivos blancos de plataforma con detalles azules, fucsia y dorados, sobre fondo beige",
   }),
 ];

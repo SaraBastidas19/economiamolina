@@ -15,6 +15,7 @@ export const SHOE_TYPES = [
   "formal",
   "escolar",
   "deportivo",
+  "sandalias",
 ] as const;
 export type ShoeType = (typeof SHOE_TYPES)[number];
 
