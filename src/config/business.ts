@@ -31,7 +31,7 @@ export const business = {
   address: null as string | null,
   addressReference: null as string | null,
   openingHours: null as string | null,
-  instagramUrl: null as string | null,
+  instagramUrl: "https://www.instagram.com/ecomolinamunoz/" as string | null,
 
   policies: {
     exchanges: null as string | null,

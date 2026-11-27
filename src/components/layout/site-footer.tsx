@@ -3,6 +3,7 @@ import Link from "next/link";
 import { business } from "@/config/business";
 import { audiences, shoeTypes } from "@/lib/taxonomy";
 import { Icon } from "@/components/ui/icon";
+import { InstagramLink } from "@/components/ui/instagram-link";
 
 export function SiteFooter() {
   const contact = [
@@ -28,6 +29,12 @@ export function SiteFooter() {
           <p className="mt-2 text-body-sm">
             {business.tagline} en {business.city}, {business.region}.
           </p>
+          {business.instagramUrl && (
+            <InstagramLink
+              url={business.instagramUrl}
+              className="mt-3 -ml-1 rounded-btn px-1 text-body-sm font-semibold text-on-dark transition-colors hover:text-accent"
+            />
+          )}
           {contact.length > 0 && (
             <ul className="mt-5 space-y-2 text-body-sm">
               {contact.map((item) => (

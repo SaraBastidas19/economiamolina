@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { business } from "@/config/business";
 import { Icon, type IconName } from "@/components/ui/icon";
+import { InstagramLink } from "@/components/ui/instagram-link";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import storePhoto from "../../../public/brand/tienda-equipo.jpg";
@@ -59,6 +60,15 @@ export function OurStore() {
             </Link>
             <WhatsAppButton size="lg" variant="soft" label="Escríbenos" message="Hola, quisiera hacer una consulta sobre su calzado." />
           </div>
+          {business.instagramUrl && (
+            <p className="mt-4 flex flex-wrap items-center gap-x-1 text-body-md text-muted">
+              Síguenos en Instagram:
+              <InstagramLink
+                url={business.instagramUrl}
+                className="rounded-btn px-1 font-semibold text-accent-text underline-offset-4 hover:underline"
+              />
+            </p>
+          )}
         </div>
       </div>
     </section>
